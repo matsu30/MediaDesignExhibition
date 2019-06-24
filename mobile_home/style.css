@@ -39,7 +39,7 @@ html,body {
   padding-bottom: 300px;
 }
 
-#fixed {
+.fixed {
   position: fixed;
   bottom: 0;
   width: 100%;
