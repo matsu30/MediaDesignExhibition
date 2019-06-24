@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 html,body {
+    font-family: 'Kosugi Maru', sans-serif;
     background-color: #F2E4EE;
     font-size: 30px;
     text-align: center;
@@ -13,10 +14,15 @@ html,body {
 }
 
 .header{
-  background-color: #C63967;
-  color: #ffffff;
-  padding: 50px ;
-}
+    position: fixed;
+    width: 100%;
+    background-color: #C63967;
+    color: #ffffff;
+    font-size: 40px;
+    padding: 40px 0px 40px 0px;
+    margin-bottom: 300px;
+    text-align: center;
+  }
 
 /* 点滅 */
 .blinking{
@@ -24,7 +30,13 @@ html,body {
     -moz-animation:blink 1s ease-in-out infinite alternate;
     animation:blink 0.8s ease-in-out infinite alternate;
     align-items: center;
-    vertical-align: middle;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    height:400px;
 }
 
 @-webkit-keyframes blink{
