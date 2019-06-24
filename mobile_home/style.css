@@ -1,6 +1,8 @@
 @charset "utf-8";
 
+
 html,body {
+    font-family: 'Kosugi Maru', sans-serif;
     background-color: #F2E4EE;
     font-size: 30px;
     text-align: center;
@@ -13,9 +15,19 @@ html,body {
 }
 
 .header{
+  position: fixed;
+  width: 100%;
   background-color: #C63967;
   color: #ffffff;
-  padding: 50px ;
+  font-size: 40px;
+  padding: 40px 0px 40px 0px;
+  margin-bottom: 300px;
+  text-align: center;
+}
+
+.image01{
+  padding-top: 200px;
+  padding-bottom: 50px;
 }
 
 .image{
@@ -24,7 +36,14 @@ html,body {
 }
 
 .under{
-  margin-bottom: 100px;
+  padding-bottom: 300px;
+}
+
+#fixed {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
 }
 
 .btn{
@@ -36,5 +55,5 @@ html,body {
   text-decoration: none;
   color: #707070;
   background: #ffffff;
-  margin-bottom: 100px;
+  margin: 100px;
 }
