@@ -1,0 +1,78 @@
+@charset "utf-8";
+
+
+html,body {
+    font-family: 'Kosugi Maru', sans-serif;
+    background-color: #F2E4EE;
+    margin: 0;
+    font-size: 40px;
+    color: #707070;
+  }
+
+.suki{
+    color:#EDA8CD; 
+}
+
+.header{
+  /*position: fixed;*/
+    width: 100%;
+    background-color: #C63967;
+    color: #ffffff;
+    font-size: 40px;
+    text-align: center;
+    padding: 40px 0px 40px 0px;
+ 
+}
+
+.form{
+    margin: 10% 10% 0% 10%;
+    padding: 60px;
+    background-color: #ffffff;
+    border-radius: 100px;
+    border: solid 10px #707070;
+}
+
+input[type="text"]{
+    width: 300px;
+    height: 30px;
+    border: 5px solid #707070;
+    padding: 0.8em;
+    font-size: 30px;
+    border-radius: 40px;
+    outline: none;
+}
+
+textarea{
+    padding: 0.8em;
+    outline: none;
+    border: 5px solid #707070;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 30px;
+    width: 540px;
+    height: 720px;
+    border-radius: 50px;
+}
+
+.title{
+    margin-top: 10px;
+}
+
+.fixed {
+    position: fixed;
+    bottom: 0;
+    margin: 0px 250px 0px 250px;
+}
+
+.btn{
+    font-size: 40px;
+    display: inline-block;
+    padding: 30px 50px;
+    border-radius: 50px;
+    border: solid 10px #EDA8CD;
+    text-decoration: none;
+    color: #707070;
+    background: #ffffff;
+    margin: 100px;
+  }
