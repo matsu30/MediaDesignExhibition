@@ -26,7 +26,7 @@ html,body {
 
 .form{
     margin: 10% 10% 0% 10%;
-    padding: 60px;
+    padding: 30px 80px 30px 80px;
     background-color: #ffffff;
     border-radius: 100px;
     border: solid 10px #707070;
@@ -51,7 +51,7 @@ textarea{
     border-radius: 3px;
     font-size: 30px;
     width: 540px;
-    height: 720px;
+    height: 850px;
     border-radius: 50px;
 }
 
@@ -60,7 +60,6 @@ textarea{
 }
 
 .fixed {
-    position: fixed;
     bottom: 0;
     margin: 0px 250px 0px 250px;
 }
@@ -74,5 +73,5 @@ textarea{
     text-decoration: none;
     color: #707070;
     background: #ffffff;
-    margin: 100px;
+    margin: 50px 100px 0px 100px;
   }
