@@ -2,41 +2,41 @@
 
 
 html,body {
-    font-family: 'Kosugi Maru', sans-serif;
-    background-color: #F2E4EE;
-    font-size: 30px;
-    text-align: center;
-    color: #707070;
-    margin: 0;
-  }
+  font-family: 'Kosugi Maru', sans-serif;
+  background-color: #F2E4EE;
+  margin: 0;
+  font-size: 15px;
+  text-align: center;
+  color: #707070;
+}
 
 .suki{
- color:#EDA8CD; 
+  color:#EDA8CD; 
 }
 
 .header{
+/*position: fixed;*/
   position: fixed;
   width: 100%;
   background-color: #C63967;
   color: #ffffff;
-  font-size: 40px;
-  padding: 40px 0px 40px 0px;
-  margin-bottom: 300px;
+  font-size: 15px;
   text-align: center;
+  padding: 15px 0px 15px 0px;
 }
 
 .image01{
-  padding-top: 200px;
-  padding-bottom: 50px;
+  padding-top: 60px;
+  padding-bottom: 0px;
 }
 
 .image{
-  padding-top: 70px;
-  padding-bottom: 50px;
+  padding-top: 100px;
+  padding-bottom: 20px;
 }
 
 .under{
-  padding-bottom: 300px;
+  padding-bottom: 200px;
 }
 
 .fixed {
@@ -46,13 +46,13 @@ html,body {
 }
 
 .btn{
-  font-size: 40px;
+  font-size: 15px;
   display: inline-block;
-  padding: 30px 50px;
-  border-radius: 50px;
-  border: solid 10px #EDA8CD;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: solid 3px #EDA8CD;
   text-decoration: none;
   color: #707070;
   background: #ffffff;
-  margin: 100px;
+  margin: 50px;
 }

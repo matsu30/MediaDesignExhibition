@@ -5,7 +5,7 @@ html,body {
     font-family: 'Kosugi Maru', sans-serif;
     background-color: #F2E4EE;
     margin: 0;
-    font-size: 40px;
+    font-size: 15px;
     color: #707070;
   }
 
@@ -18,60 +18,64 @@ html,body {
     width: 100%;
     background-color: #C63967;
     color: #ffffff;
-    font-size: 40px;
+    font-size: 15px;
     text-align: center;
-    padding: 40px 0px 40px 0px;
- 
+    padding: 15px 0px 15px 0px;
+}
+
+.form-label {
+  display: block;
 }
 
 .form{
-    margin: 10% 10% 0% 10%;
-    padding: 30px 80px 30px 80px;
+    margin: 5% 10% 0% 10%;
+    padding: 5px 5px 5px 25px;
     background-color: #ffffff;
-    border-radius: 100px;
-    border: solid 10px #707070;
+    border-radius: 40px;
+    border: solid 3px #707070;
 }
 
 input[type="text"]{
-    width: 300px;
-    height: 30px;
-    border: 5px solid #707070;
+    width: 200px;
+    height: 15px;
+    border: 3px solid #707070;
     padding: 0.8em;
-    font-size: 30px;
-    border-radius: 40px;
+    font-size: 15px;
+    border-radius: 30px;
     outline: none;
 }
 
 textarea{
     padding: 0.8em;
     outline: none;
-    border: 5px solid #707070;
+    border: 3px solid #707070;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    font-size: 30px;
-    width: 540px;
-    height: 850px;
-    border-radius: 50px;
+    font-size: 15px;
+    width: 200px;
+    height: 350px;
+    border-radius: 30px;
 }
 
 .title{
-    margin-top: 10px;
+    margin-top: 3px;
 }
 
 .fixed {
     bottom: 0;
-    margin: 0px 250px 0px 250px;
+    margin-top: 10px;
+    text-align: center;
 }
 
+
 .btn{
-    font-size: 40px;
+    font-size: 15px;
     display: inline-block;
-    padding: 30px 50px;
-    border-radius: 50px;
-    border: solid 10px #EDA8CD;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: solid 3px #EDA8CD;
     text-decoration: none;
     color: #707070;
     background: #ffffff;
-    margin: 50px 100px 0px 100px;
   }
