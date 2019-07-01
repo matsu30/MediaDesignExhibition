@@ -24,6 +24,10 @@ html,body {
     padding: 15px 0px 15px 0px;
 }
 
+.image01{
+    margin-top: -50px;
+}
+
 .message{
     background-color: #ffffff;
     border-top: solid 1px #707070;
