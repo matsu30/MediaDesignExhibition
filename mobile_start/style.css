@@ -1,28 +1,27 @@
 @charset "utf-8";
 
+
 html,body {
     font-family: 'Kosugi Maru', sans-serif;
     background-color: #F2E4EE;
-    font-size: 30px;
-    text-align: center;
-    color: #707070;
     margin: 0;
+    font-size: 15px;
+    color: #707070;
   }
 
 .suki{
- color:#EDA8CD; 
+    color:#EDA8CD; 
 }
 
 .header{
-    position: fixed;
+  /*position: fixed;*/
     width: 100%;
     background-color: #C63967;
     color: #ffffff;
-    font-size: 40px;
-    padding: 40px 0px 40px 0px;
-    margin-bottom: 300px;
+    font-size: 15px;
     text-align: center;
-  }
+    padding: 15px 0px 15px 0px;
+}
 
 /* 点滅 */
 .blinking{
@@ -35,8 +34,7 @@ html,body {
     left: 0;
     right: 0;
     bottom: 0;
-    margin: auto;
-    height:400px;
+    margin: 70% 30%;
 }
 
 @-webkit-keyframes blink{
