@@ -24,15 +24,22 @@ html,body {
 
 .global-nav {
     position: fixed;
-    right: -320px; /* これで隠れる */
+    right: -370px; /* これで隠れる */
     top: 0;
-    width: 300px; /* スマホに収まるくらい */
+    width: 350px; /* スマホに収まるくらい */
     height: 100vh;
     padding-top: 40px;
-    background-color: #fff;
+    background-color: #F5D8E8;
     transition: all .6s;
     z-index: 200;
     overflow-y: auto; /* メニューが多くなったらスクロールできるように */
+    font-size: 13px;
+    text-align: left;
+    color: #707070;
+}
+
+.menu-text{
+    padding: 100px 40px 40px 40px;
 }
 
 .hamburger {
@@ -45,27 +52,27 @@ html,body {
     z-index: 300;
 }
 
-.global-nav__list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
 .global-nav__item {
-    text-align: center;
-    padding: 0 14px;
+    text-align: left;
+    padding: 0 40px;
 }
 
 .global-nav__item a {
     display: block;
     padding: 8px 0;
-    border-bottom: 1px solid #eee;
     text-decoration: none;
-    color: #111;
+    color: #707070;
 }
+
+.icon{
+    margin-bottom: -7px;
+    margin-right: 7px;
+}
+
 .global-nav__item a:hover {
     background-color: #eee;
 }
+
 .hamburger__line {
     position: absolute;
     left: 11px;
