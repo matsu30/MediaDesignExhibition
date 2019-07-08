@@ -55,6 +55,7 @@ html,body {
 .global-nav__item {
     text-align: left;
     padding: 0 40px;
+    margin: 10px 0px;
 }
 
 .global-nav__item a {
@@ -71,6 +72,7 @@ html,body {
 
 .global-nav__item a:hover {
     background-color: #eee;
+    text-decoration:underline;
 }
 
 .hamburger__line {
@@ -103,6 +105,40 @@ html,body {
     transition: all .6s;
     cursor: pointer;
 }
+
+.global-nav--1 {
+    position: fixed;
+    right: -740px; /* これで隠れる */
+    top: 0;
+    width: 700px; /* スマホに収まるくらい */
+    height: 100vh;
+    padding-top: 40px;
+    background-color: #fff;
+    transition: all .6s;
+    z-index: 199;
+    overflow-y: auto; /* メニューが多くなったらスクロールできるように */
+    font-size: 13px;
+    text-align: left;
+    color: #707070;
+}
+
+.global-nav--2 {
+    position: fixed;
+    right: -740px; /* これで隠れる */
+    top: 0;
+    width: 700px; /* スマホに収まるくらい */
+    height: 100vh;
+    padding-top: 40px;
+    background-color: #fff;
+    transition: all .6s;
+    z-index: 199;
+    overflow-y: auto; /* メニューが多くなったらスクロールできるように */
+    font-size: 13px;
+    text-align: left;
+    color: #707070;
+}
+
+
 /* 表示された時用のCSS */
 .nav-open .global-nav {
    right: 0;
@@ -122,6 +158,15 @@ html,body {
 .nav-open .hamburger__line--3 {
     transform: rotate(-45deg);
     top: 20px;
+}
+
+/*menu1*/
+.nav-open-1 .global-nav--1 {
+    right: 0;
+}
+
+.nav-open-2 .global-nav--2 {
+    right: 0;
 }
 
 .fotter{
