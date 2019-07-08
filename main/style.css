@@ -99,7 +99,7 @@ html,body {
     width: 100vw;
     height: 100vh;
     z-index: 100;
-    background-color: #000;
+    background-color: none;
     opacity: 0;
     visibility: hidden;
     transition: all .6s;
@@ -115,7 +115,7 @@ html,body {
     padding-top: 40px;
     background-color: #fff;
     transition: all .6s;
-    z-index: 199;
+    z-index: 50;
     overflow-y: auto; /* メニューが多くなったらスクロールできるように */
     font-size: 13px;
     text-align: left;
@@ -131,7 +131,7 @@ html,body {
     padding-top: 40px;
     background-color: #fff;
     transition: all .6s;
-    z-index: 199;
+    z-index: 50;
     overflow-y: auto; /* メニューが多くなったらスクロールできるように */
     font-size: 13px;
     text-align: left;
