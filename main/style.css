@@ -114,7 +114,7 @@ html,body {
     height: 100vh;
     padding-top: 40px;
     background-color: #fff;
-    transition: all .6s;
+    /* transition: all .6s; */
     z-index: 50;
     overflow-y: auto; /* メニューが多くなったらスクロールできるように */
     font-size: 13px;
@@ -130,7 +130,7 @@ html,body {
     height: 100vh;
     padding-top: 40px;
     background-color: #fff;
-    transition: all .6s;
+    /* transition: all .6s; */
     z-index: 50;
     overflow-y: auto; /* メニューが多くなったらスクロールできるように */
     font-size: 13px;
@@ -161,6 +161,7 @@ html,body {
 }
 
 /*menu1*/
+/*
 .nav-open-1 .global-nav--1 {
     right: 0;
 }
@@ -168,6 +169,7 @@ html,body {
 .nav-open-2 .global-nav--2 {
     right: 0;
 }
+*/
 
 .fotter{
     width: 100%;
