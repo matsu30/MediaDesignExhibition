@@ -65,7 +65,7 @@ function toggleNav() {
   }
   
   toggleNav();
-  
+
  // ここからtree.jsの処理
 window.addEventListener('load', init);
 
@@ -79,7 +79,6 @@ function init() {
 	});
 	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(width, height);
-	renderer.setClearColor(0xF2E4EE);
 	// シーンを作成
 	const scene = new THREE.Scene();
 	// カメラを作成
@@ -168,10 +167,10 @@ function init() {
 	btndel.addEventListener('click', function() {
 		console.log('クリックされました！');
 
-		scene.remove(meshs[0]);
-		meshs.shift();
+		scene.remove(meshs[meshs.length - 1]);
+		meshs.pop();
 		//mesh.material.dispose();
 		//mesh.geometry.dispose();
 		
 	}, false);
-} 
+}
