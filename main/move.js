@@ -1,36 +1,71 @@
 function toggleNav() {
 	var body = document.body;
-	var hamburger = document.getElementById('js-hamburger');
-	var blackBg = document.getElementById('js-black-bg');
-	var menu1 = document.getElementById('js-menu--1');
-	var menu2 = document.getElementById('js-menu--2');
+	var hamburger = document.getElementById("js-hamburger");
+	var blackBg = document.getElementById("js-black-bg");
+	var menu1 = document.getElementById("js-menu--1");
+	var menu2 = document.getElementById("js-menu--2");
   
-	hamburger.addEventListener('click', function() {
-		body.classList.toggle('nav-open');
-		body.classList.remove('nav-open-1');
-		body.classList.remove('nav-open-2');
+	hamburger.addEventListener("click", function() {
+	  body.classList.toggle("nav-open");
+	  body.classList.remove("nav-open-1");
+	  body.classList.remove("nav-open-2");
+  
+	  TweenMax.to(".global-nav--1", 0.6, { right: -740 });
+	  TweenMax.to(".global-nav--2", 0.6, { right: -740 });
 	});
-	blackBg.addEventListener('click', function() {
-		body.classList.remove('nav-open');
-		body.classList.remove('nav-open-1');
-		body.classList.remove('nav-open-2');
+  
+	blackBg.addEventListener("click", function() {
+	  body.classList.remove("nav-open");
+	  body.classList.remove("nav-open-1");
+	  body.classList.remove("nav-open-2");
+  
+	  TweenMax.to(".global-nav--1", 0.6, { right: -740 });
+	  TweenMax.to(".global-nav--2", 0.6, { right: -740 });
 	});
-
-	menu1.addEventListener('click', function() {
-		var tl = new TimelineMax();
-		tl.to(menu1,{ right:0 });
-		body.classList.remove('nav-open-2');
-		body.classList.toggle('nav-open-1');
+  
+	menu1.addEventListener("click", function() {
+	  var tl = new TimelineMax({
+		onStart: function() {
+		  // アニメーションが開始した時の処理
+		  body.classList.add("nav-open-1");
+		},
+		onComplete: function() {
+		  body.classList.remove("nav-open-2");
+		}
+	  });
+  
+	  if (body.classList.contains("nav-open-2")) {
+		// .global-nav--2 が開いて入ればこの中を処理する
+		// .global-nav--2 を隠す
+		tl.to(".global-nav--2", 0.6, { right: -740 });
+	  }
+	  // .global-nav--1 を表示する
+	  tl.to(".global-nav--1", 0.6, { right: 0 });
 	});
-
-	menu2.addEventListener('click', function() {
-		body.classList.remove('nav-open-1');
-		body.classList.toggle('nav-open-2');
+  
+	menu2.addEventListener("click", function() {
+	  var tl = new TimelineMax({
+		onStart: function() {
+		  // アニメーションが開始した時の処理
+		  body.classList.add("nav-open-2");
+		},
+		onComplete: function() {
+		  body.classList.remove("nav-open-1");
+		}
+	  });
+  
+	  if (body.classList.contains("nav-open-1")) {
+		// .global-nav--1 が開いて入ればこの中を処理する
+		// .global-nav--1 を隠す
+		tl.to(".global-nav--1", 0.6, { right: -740 });
+	  }
+	  // .global-nav--2 を表示する
+	  tl.to(".global-nav--2", 0.6, { right: 0 });
 	});
-
   }
- toggleNav();
-
+  
+  toggleNav();
+  
  // ここからtree.jsの処理
 window.addEventListener('load', init);
 
@@ -99,10 +134,16 @@ function init() {
 	}
 
 	var btn = document.getElementById('btn');
+	let mesh;
+	let geometry;
+	let material;
+
+	const meshs = [];
+
 	btn.addEventListener('click', function() {
 		console.log('クリックされました！');
-		const geometry = new THREE.BoxGeometry(100, 100, 100);
-		const material = new THREE.MeshBasicMaterial({color: 0x6699FF});
+		geometry = new THREE.BoxGeometry(100, 100, 100);
+		material = new THREE.MeshBasicMaterial({color: 0x6699FF});
 		var randomX = getRandom( -800, 800 );
 		var randomY = getRandom( -300, 400 );
 		var randomZ = getRandom( -1000, 0 );
@@ -114,20 +155,22 @@ function init() {
 		// メッシュを作成
 		const mesh = new THREE.Mesh(geometry, material);
 		mesh.position.set(randomX,randomY,randomZ);
+
+		meshs.push(mesh);
 		// 3D空間にメッシュを追加
 		scene.add(mesh);
-
+		
+		console.log(meshs);
 	}, false);
 
 	var btndel = document.getElementById('btn-delete');
 	btndel.addEventListener('click', function() {
 		console.log('クリックされました！');
-		for(var i = mesh.length; i--; ){
-			scene.remove(meshs[i]);
-			delete s[i];
-			}
-			
-			cubes.length = 0;
+
+		scene.remove(meshs[meshs.length - 1]);
+		meshs.pop();
+		//mesh.material.dispose();
+		//mesh.geometry.dispose();
 		
 	}, false);
-}
+} 
