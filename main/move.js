@@ -135,16 +135,16 @@ function init() {
 	}
 
 	var btn = document.getElementById('btn');
-	let mesh;
-	let geometry;
-	let material;
+	//let mesh;
+	//let geometry;
+	//let material;
 
-	const meshs = [];
+	const objects = [];
 
 	btn.addEventListener('click', function() {
 		console.log('クリックされました！');
-		geometry = new THREE.BoxGeometry(100, 100, 100);
-		material = new THREE.MeshBasicMaterial({color: 0x6699FF});
+		//geometry = new THREE.BoxGeometry(100, 100, 100);
+		//material = new THREE.MeshBasicMaterial({color: 0x6699FF});
 		var randomX = getRandom( -800, 800 );
 		var randomY = getRandom( -300, 400 );
 		var randomZ = getRandom( -1000, 0 );
@@ -154,22 +154,22 @@ function init() {
 		}
 		console.log( randomX,randomY,randomZ );
 		// メッシュを作成
-		const mesh = new THREE.Mesh(geometry, material);
-		mesh.position.set(randomX,randomY,randomZ);
+		//const mesh = new THREE.Mesh(geometry, material);
+		object.position.set(randomX,randomY,randomZ);
 
-		meshs.push(mesh);
-		// 3D空間にメッシュを追加
-		scene.add(mesh);
+		objects.push(object);
+		// 3D空間にオブジェクトを追加
+		scene.add(object);
 		
-		console.log(meshs);
+		console.log(objects);
 	}, false);
 
 	var btndel = document.getElementById('btn-delete');
 	btndel.addEventListener('click', function() {
 		console.log('クリックされました！');
 
-		scene.remove(meshs[0]);
-		meshs.shift();
+		scene.remove(objects[0]);
+		objects.shift();
 		//mesh.material.dispose();
 		//mesh.geometry.dispose();
 		
