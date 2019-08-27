@@ -92,7 +92,7 @@ function init() {
 		10000
 	);
 	// カメラの初期座標を設定
-	camera.position.set(0, 0, 15);
+	camera.position.set(0, 0, 25);
 	// カメラコントローラーを作成
 	const controls = new THREE.OrbitControls(camera);
 	// 平行光源を作成
@@ -116,7 +116,7 @@ function init() {
 		//geometry = new THREE.BoxGeometry(100, 100, 100);
 		//material = new THREE.MeshBasicMaterial({color: 0x6699FF});
 		var cloneObject = heart.clone();
-		var randomX = getRandom( -5, 5 );
+		var randomX = getRandom( -15, 15 );
 		var randomY = getRandom( -5, 5 );
 		var randomZ = getRandom( -5, 13 );
 		function getRandom( min, max ) {
@@ -173,7 +173,7 @@ function init() {
 	  //現在時刻を表示する関数
 	  function showNowDate(){
 		const number = Object.keys(objects).length;
-		if(number >= 40){
+		if(number >= 50){
 			scene.remove(objects[0]);
 			objects.shift();
 		};
