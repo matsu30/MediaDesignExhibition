@@ -69,6 +69,8 @@ function toggleNav() {
  // ここからtree.jsの処理
 window.addEventListener('load', init);
 
+const objects = []; // 生成したハートを入れておく配列
+
 function init() {
 	// サイズを指定
 	const width = 860;
@@ -90,7 +92,7 @@ function init() {
 		10000
 	);
 	// カメラの初期座標を設定
-	camera.position.set(0, 0, 1000);
+	camera.position.set(0, 0, 15);
 	// カメラコントローラーを作成
 	const controls = new THREE.OrbitControls(camera);
 	// 平行光源を作成
@@ -101,13 +103,38 @@ function init() {
 	const ambientLight = new THREE.AmbientLight(0xffffff);
 	scene.add(ambientLight);
 	// 3DS形式のモデルデータを読み込む
-	const loader = new THREE.TDSLoader();
+	const loader = new THREE.GLTFLoader();
 	// テクスチャーのパスを指定
 	//loader.setPath('./models');
 	// 3dsファイルのパスを指定
-	loader.load('./models/3ds/portalgun/portalgun.3ds', object => {
-		// 読み込み後に3D空間に追加
-	scene.add(object);
+	loader.load('./models/glTF/Heart.glTF', object => {
+	// 読み込み後に3D空間に追加
+	console.log(object.scene.children);
+	const heart = object.scene.children[0];
+	btn.addEventListener('click', function() {
+		console.log('クリックされました！');
+		//geometry = new THREE.BoxGeometry(100, 100, 100);
+		//material = new THREE.MeshBasicMaterial({color: 0x6699FF});
+		var cloneObject = heart.clone();
+		var randomX = getRandom( -5, 5 );
+		var randomY = getRandom( -5, 5 );
+		var randomZ = getRandom( -5, 13 );
+		function getRandom( min, max ) {
+			var randomX = Math.floor( Math.random() * (max + 1 - min) ) + min;
+			return randomX;
+		}
+		console.log( randomX,randomY,randomZ );
+		// メッシュを作成
+		//const mesh = new THREE.Mesh(geometry, material);
+		cloneObject.position.set(randomX,randomY,randomZ);
+
+		objects.push(cloneObject);
+		// 3D空間にオブジェクトを追加
+		scene.add(cloneObject);
+		
+		console.log(objects);
+	}, false);
+	
 	})
 
 	tick();
@@ -139,39 +166,27 @@ function init() {
 	//let geometry;
 	//let material;
 
-	const objects = [];
 
-	btn.addEventListener('click', function() {
-		console.log('クリックされました！');
-		//geometry = new THREE.BoxGeometry(100, 100, 100);
-		//material = new THREE.MeshBasicMaterial({color: 0x6699FF});
-		var randomX = getRandom( -800, 800 );
-		var randomY = getRandom( -300, 400 );
-		var randomZ = getRandom( -1000, 0 );
-		function getRandom( min, max ) {
-			var randomX = Math.floor( Math.random() * (max + 1 - min) ) + min;
-			return randomX;
-		}
-		console.log( randomX,randomY,randomZ );
-		// メッシュを作成
-		//const mesh = new THREE.Mesh(geometry, material);
-		object.position.set(randomX,randomY,randomZ);
+		setInterval(showNowDate, 1000);
 
-		objects.push(object);
-		// 3D空間にオブジェクトを追加
-		scene.add(object);
-		
-		console.log(objects);
-	}, false);
+	   
+	  //現在時刻を表示する関数
+	  function showNowDate(){
+		const number = Object.keys(objects).length;
+		if(number >= 40){
+			scene.remove(objects[0]);
+			objects.shift();
+		};
+	  };
 
-	var btndel = document.getElementById('btn-delete');
-	btndel.addEventListener('click', function() {
-		console.log('クリックされました！');
+	//var btndel = document.getElementById('btn-delete');
+	//btndel.addEventListener('click', function() {
+		//console.log('クリックされました！');
 
-		scene.remove(objects[0]);
-		objects.shift();
+		//scene.remove(objects[0]);
+		//objects.shift();
 		//mesh.material.dispose();
 		//mesh.geometry.dispose();
 		
-	}, false);
-} 
+	//},false);
+};
