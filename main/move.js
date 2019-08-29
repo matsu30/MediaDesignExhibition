@@ -104,36 +104,75 @@ function init() {
 	scene.add(ambientLight);
 	// 3DS形式のモデルデータを読み込む
 	const loader = new THREE.GLTFLoader();
+	const material = new THREE.MeshStandardMaterial({
+		map: texture
+	  });
 	// テクスチャーのパスを指定
 	//loader.setPath('./models');
 	// 3dsファイルのパスを指定
 	loader.load('./models/glTF/Heart.glTF', object => {
-	// 読み込み後に3D空間に追加
-	console.log(object.scene.children);
-	const heart = object.scene.children[0];
-	btn.addEventListener('click', function() {
-		console.log('クリックされました！');
-		//geometry = new THREE.BoxGeometry(100, 100, 100);
-		//material = new THREE.MeshBasicMaterial({color: 0x6699FF});
-		var cloneObject = heart.clone();
-		var randomX = getRandom( -15, 15 );
-		var randomY = getRandom( -5, 5 );
-		var randomZ = getRandom( -5, 13 );
-		function getRandom( min, max ) {
-			var randomX = Math.floor( Math.random() * (max + 1 - min) ) + min;
-			return randomX;
-		}
-		console.log( randomX,randomY,randomZ );
-		// メッシュを作成
-		//const mesh = new THREE.Mesh(geometry, material);
-		cloneObject.position.set(randomX,randomY,randomZ);
+		// 読み込み後に3D空間に追加
+		console.log(object.scene.children);
+		const heart = object.scene.children[0];
+		btn.addEventListener('click', function() {
+			console.log('クリックされました！');
+			//geometry = new THREE.BoxGeometry(100, 100, 100);
+			//material = new THREE.MeshBasicMaterial({color: 0x6699FF});
+			var cloneObject = heart.clone();
+			var randomX = getRandom( -15, 15 );
+			var randomY = getRandom( -5, 5 );
+			var randomZ = getRandom( -5, 13 );
+			function getRandom( min, max ) {
+				var randomX = Math.floor( Math.random() * (max + 1 - min) ) + min;
+				return randomX;
+			}
 
-		objects.push(cloneObject);
-		// 3D空間にオブジェクトを追加
-		scene.add(cloneObject);
+			//文字の描写---------------------------------------
+			// キャンバスの作成
+			var canvas = document.createElement( 'canvas' );
+			var context = canvas.getContext( '2d' );
+			// キャンバスサイズの設定
+			context.width = 512;
+			context.height = 256;
+			
+			// 枠の描画開始
+			context.beginPath();
+			context.strokeStyle = '#FFFF00';
+			context.lineWidth = 4.0;
+			context.strokeRect(  0 ,  0 , 256 , 128 );
+			context.stroke();
+			
+			// 文字の描画開始
+			context.beginPath();
+			// 文字色指定
+			context.fillStyle = '#FFFF00';
+			// フォントサイズとスタイルの定義
+			context.font= '100px sans-serif';
+			// 文字の表示位置指定
+			context.textAlign = 'center';
+			context.textBaseline = 'middle';
+			// 文字、文字の開始位置、最大幅
+			context.fillText('あいうえお', 128, 64, 230);
+			context.fill();
+			
+			// テクスチャの作成
+			var texture = new THREE.Texture( canvas );
+			// これをやらないとマテリアルは真っ暗
+			texture.needsUpdate = true;
+			//ここまで------------------------------------------
+
+			console.log( randomX,randomY,randomZ );
+			// メッシュを作成
+			const mesh = new THREE.Mesh(geometry, material);
+			cloneObject.position.set(randomX,randomY,randomZ);
+
+			objects.push(cloneObject);
+			// 3D空間にオブジェクトを追加
+			scene.add(cloneObject);
+			scene.add(mesh);
 		
-		console.log(objects);
-	}, false);
+			console.log(objects);
+		}, false);
 	
 	})
 
@@ -165,7 +204,7 @@ function init() {
 	//let mesh;
 	//let geometry;
 	//let material;
-
+	
 
 		setInterval(showNowDate, 1000);
 
