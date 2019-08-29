@@ -104,9 +104,6 @@ function init() {
 	scene.add(ambientLight);
 	// 3DS形式のモデルデータを読み込む
 	const loader = new THREE.GLTFLoader();
-	const material = new THREE.MeshStandardMaterial({
-		map: texture
-	  });
 	// テクスチャーのパスを指定
 	//loader.setPath('./models');
 	// 3dsファイルのパスを指定
@@ -126,40 +123,6 @@ function init() {
 				var randomX = Math.floor( Math.random() * (max + 1 - min) ) + min;
 				return randomX;
 			}
-
-			//文字の描写---------------------------------------
-			// キャンバスの作成
-			var canvas = document.createElement( 'canvas' );
-			var context = canvas.getContext( '2d' );
-			// キャンバスサイズの設定
-			context.width = 512;
-			context.height = 256;
-			
-			// 枠の描画開始
-			context.beginPath();
-			context.strokeStyle = '#FFFF00';
-			context.lineWidth = 4.0;
-			context.strokeRect(  0 ,  0 , 256 , 128 );
-			context.stroke();
-			
-			// 文字の描画開始
-			context.beginPath();
-			// 文字色指定
-			context.fillStyle = '#FFFF00';
-			// フォントサイズとスタイルの定義
-			context.font= '100px sans-serif';
-			// 文字の表示位置指定
-			context.textAlign = 'center';
-			context.textBaseline = 'middle';
-			// 文字、文字の開始位置、最大幅
-			context.fillText('あいうえお', 128, 64, 230);
-			context.fill();
-			
-			// テクスチャの作成
-			var texture = new THREE.Texture( canvas );
-			// これをやらないとマテリアルは真っ暗
-			texture.needsUpdate = true;
-			//ここまで------------------------------------------
 
 			console.log( randomX,randomY,randomZ );
 			// メッシュを作成
@@ -206,11 +169,11 @@ function init() {
 	//let material;
 	
 
-		setInterval(showNowDate, 1000);
+	setInterval(showNowDate, 1000);
 
 	   
-	  //現在時刻を表示する関数
-	  function showNowDate(){
+	//現在時刻を表示する関数
+	function showNowDate(){
 		const number = Object.keys(objects).length;
 		if(number >= 50){
 			scene.remove(objects[0]);
