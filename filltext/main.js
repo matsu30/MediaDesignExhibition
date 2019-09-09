@@ -4,6 +4,14 @@ window.onload = function(){
         width = canvas.width = 1000,
         height = canvas.height = 1000;
 
+    // 塗り色を決める
+    context.fillStyle = "#ffffff";
+    // canvasの左から0、上から0の位置に幅 width、高さ heightの塗りつぶしの四角形を描く
+    context.fillRect(0, 0, width, height);
+
+    // 以降の塗り色を決める
+    context.fillStyle = "#000000";
+
     for(var i = 0; i < 100; i += 1){
         context.beginPath();
         context.moveTo(Math.random() * width, Math.random() * height);    
@@ -11,8 +19,11 @@ window.onload = function(){
         context.stroke();
     }
 
-    context.font = "48px serif";
-    context.fillText("Hello world", 50, 100);
+    
+
+    context.font = "bold 48px sans-serif";
+    context.fillStyle = '#EDA8CD';
+    context.fillText("あいうえお", 50, 100);
 
     // 空のimg要素を作る
     const img = new Image();
@@ -25,6 +36,8 @@ window.onload = function(){
 
     // img要素 srcに画像化（base64化）したcanvasの内容を反映する
     img.src = canvas.toDataURL('image/jpeg');
+
+    
     
 };
 

@@ -112,6 +112,7 @@ function init() {
 		console.log(object.scene.children);
 		const heart = object.scene.children[0];
 		btn.addEventListener('click', function() {
+
 			console.log('クリックされました！');
 			//geometry = new THREE.BoxGeometry(100, 100, 100);
 			//material = new THREE.MeshBasicMaterial({color: 0x6699FF});
@@ -126,13 +127,13 @@ function init() {
 
 			console.log( randomX,randomY,randomZ );
 			// メッシュを作成
-			const mesh = new THREE.Mesh(geometry, material);
+			//const mesh = new THREE.Mesh(geometry, material);
 			cloneObject.position.set(randomX,randomY,randomZ);
 
 			objects.push(cloneObject);
 			// 3D空間にオブジェクトを追加
 			scene.add(cloneObject);
-			scene.add(mesh);
+			//scene.add(mesh);
 		
 			console.log(objects);
 		}, false);
