@@ -100,7 +100,7 @@ function init() {
 	directionalLight.position.set(1, 1, 1);
 	scene.add(directionalLight);
 	// 環境光を追加
-	const ambientLight = new THREE.AmbientLight(0xffffff);
+	ambientLight = new THREE.AmbientLight(0xff7f50, .5);
 	scene.add(ambientLight);
 	// 3DS形式のモデルデータを読み込む
 	const loader = new THREE.GLTFLoader();

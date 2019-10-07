@@ -5,25 +5,27 @@ window.onload = function(){
         height = canvas.height = 1000;
 
     // 塗り色を決める
-    context.fillStyle = "#ffffff";
+    context.fillStyle = "#F5D8E8";
     // canvasの左から0、上から0の位置に幅 width、高さ heightの塗りつぶしの四角形を描く
     context.fillRect(0, 0, width, height);
 
     // 以降の塗り色を決める
     context.fillStyle = "#000000";
 
-    for(var i = 0; i < 100; i += 1){
-        context.beginPath();
-        context.moveTo(Math.random() * width, Math.random() * height);    
-        context.lineTo(Math.random() * width, Math.random() * height);    
-        context.stroke();
-    }
+    //for(var i = 0; i < 100; i += 1){
+    //    context.beginPath();
+    //    context.moveTo(Math.random() * width, Math.random() * height);    
+    //    context.lineTo(Math.random() * width, Math.random() * height);    
+    //   context.stroke();
+    //}
 
     
 
-    context.font = "bold 48px sans-serif";
+    context.font = "bold 600px sans-serif";
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
     context.fillStyle = '#EDA8CD';
-    context.fillText("あいうえお", 50, 100);
+    context.fillText("ねこ", 500, 500, 1000);
 
     // 空のimg要素を作る
     const img = new Image();
