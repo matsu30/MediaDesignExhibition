@@ -96,27 +96,82 @@ function init() {
 	// カメラコントローラーを作成
 	const controls = new THREE.OrbitControls(camera);
 	// 平行光源を作成
-	const directionalLight = new THREE.DirectionalLight(0xffffff);
-	directionalLight.position.set(1, 1, 1);
+	const directionalLight = new THREE.DirectionalLight(0xffffff,0.5);
+	directionalLight.position.set(0, 1, 1);
 	scene.add(directionalLight);
 	// 環境光を追加
-	ambientLight = new THREE.AmbientLight(0xff7f50, .5);
-	scene.add(ambientLight);
+	hemisphereLight = new THREE.HemisphereLight(0xf4cccc,0xffffff);
+	scene.add(hemisphereLight); 
+
 	// 3DS形式のモデルデータを読み込む
 	const loader = new THREE.GLTFLoader();
 	// テクスチャーのパスを指定
 	//loader.setPath('./models');
+
+	Heart = function(c,x,y,z){
+
+		console.log(c,x,y,z);
+
+		this.loader = new THREE.GLTFLoader();
+		this.mesh = new THREE.Object3D(); 
+		var geom = new THREE.BoxGeometry(2,2,2);
+		var mat = new THREE.MeshPhongMaterial({
+			color:c,
+		});
+
+
+		function getRandom( min, max ) {
+			return Math.floor( Math.random() * (max + 1 - min) ) + min;
+		}
+		
+		var randomX = getRandom( -x, x );
+		var randomY = getRandom( -y, y );
+		var randomZ = getRandom( -z+5, z+3 );
+
+		this.mesh.position.x = randomX;
+		this.mesh.position.y = randomY;
+		this.mesh.position.z = randomZ;
+
+		this.mesh.rotation.y = Math.PI*2*Math.random();
+
+
+     ///////////////////////////////////////////////////////////
+	 //var tm = new TimelineMax({
+	 //	yoyo : true, 
+	 //	repeat : -1
+	 //});
+	 //tm.to( "#Heart", 1, {
+	 //	"y" : 50,
+	 //	ease : Power1.easeOut
+	 //});
+
+    //////////////////////////////////////////////////////////////
+
+
+		//this.mesh.add(new THREE.Mesh(geom, mat));
+		this.loader.load('./models/glTF/Heart.glTF', object => {
+			const heart = object.scene.children[0];
+			this.mesh.add(heart);
+		});
+	}
+
 	// 3dsファイルのパスを指定
 	loader.load('./models/glTF/Heart.glTF', object => {
-		// 読み込み後に3D空間に追加
-		console.log(object.scene.children);
-		const heart = object.scene.children[0];
+			// 読み込み後に3D空間に追加
+			console.log(object.scene.children);
+			const heart = object.scene.children[0];
+		
+			//var geom = new THREE.BoxGeometry(2,2,2);
+			//var mat = new THREE.MeshPhongMaterial;
+
+		//クリック
 		btn.addEventListener('click', function() {
 
 			console.log('クリックされました！');
+
 			//geometry = new THREE.BoxGeometry(100, 100, 100);
 			//material = new THREE.MeshBasicMaterial({color: 0x6699FF});
-			var cloneObject = heart.clone();
+			//var cloneObject =  new THREE.Mesh(geom, mat);
 			var randomX = getRandom( -15, 15 );
 			var randomY = getRandom( -5, 5 );
 			var randomZ = getRandom( -5, 13 );
@@ -128,17 +183,25 @@ function init() {
 			console.log( randomX,randomY,randomZ );
 			// メッシュを作成
 			//const mesh = new THREE.Mesh(geometry, material);
-			cloneObject.position.set(randomX,randomY,randomZ);
+			//cloneObject.position.set(randomX,randomY,randomZ);
 
-			objects.push(cloneObject);
+			//objects.push(cloneObject);
 			// 3D空間にオブジェクトを追加
-			scene.add(cloneObject);
+			//scene.add(cloneObject);
 			//scene.add(mesh);
-		
+			var heart = new Heart(0xaa34f1, 15, 5, 10);
+
+			scene.add(heart.mesh);
+	
 			console.log(objects);
 		}, false);
 	
-	})
+	});
+	
+
+
+
+
 
 	tick();
 	// 毎フレーム時に実行されるループイベントです
@@ -193,3 +256,6 @@ function init() {
 		
 	//},false);
 };
+
+//////////////////////////////////////////////////////////////////////
+
