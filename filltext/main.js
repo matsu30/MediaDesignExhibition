@@ -1,8 +1,8 @@
 window.onload = function(){
     var canvas = document.getElementById("canvas"),
         context = canvas.getContext("2d"),
-        width = canvas.width = 1000,
-        height = canvas.height = 1000;
+        width = canvas.width = 1,
+        height = canvas.height = 1;
 
     // 塗り色を決める
     context.fillStyle = "#F5D8E8";
@@ -11,15 +11,6 @@ window.onload = function(){
 
     // 以降の塗り色を決める
     context.fillStyle = "#000000";
-
-    //for(var i = 0; i < 100; i += 1){
-    //    context.beginPath();
-    //    context.moveTo(Math.random() * width, Math.random() * height);    
-    //    context.lineTo(Math.random() * width, Math.random() * height);    
-    //   context.stroke();
-    //}
-
-    
 
     context.font = "bold 600px sans-serif";
     context.textAlign = 'center';
@@ -39,7 +30,7 @@ window.onload = function(){
     // img要素 srcに画像化（base64化）したcanvasの内容を反映する
     img.src = canvas.toDataURL('image/jpeg');
 
-    
+    console.log(img.src);
     
 };
 

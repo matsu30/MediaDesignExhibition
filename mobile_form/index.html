@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
 	<link href="https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap" rel="stylesheet">
-	<title>「好き」を「かたち」に。</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <title>「好き」を「かたち」に。</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
@@ -15,20 +15,28 @@
         「<span class="suki">好き</span>」を「<span class="suki">かたち</span>」に。
     </div><!--/header-->
 
-    <div class="form">
-        <form action="#" method="POST">
-            <p><label class="form-label" for="title-field">好きなもの</label>
-            <input type="text" name="title" class="title"></textarea>
-            </p>
-            <p><label class="form-label" for="title-field">ここが好き</label>
-            <textarea name="title" class="title"></textarea>
-            </p>
-        </form>
-    </div>
 
-    <div class="fixed">
-        <a href="http://localhost/MediaDesignExhibition/mobile_end/" class="btn">送信する</a>
-    </div><!--/bottun-->
-    
+    <form id="js-form" action="post-heart">
+        <canvas id="js-canvas" width="1" height="1"></canvas>
+        <div class="form">
+            <form action="#" method="POST">
+                <p><label class="form-label" for="title-field">好きなもの</label>
+                <input type="text" name="title" class="title" id="js-input">
+                </p>
+                <p><label class="form-label" for="title-field">ここが好き</label>
+                <textarea name="title" class="title" id="js-textarea">gununu</textarea>
+                </p>
+            </form>
+        </div>
+
+        <!--
+            <div class="fixed">
+            <a href="http://localhost/MediaDesignExhibition/mobile_end/" id="btn">送信する</a>
+            </div>  /bottun
+        -->
+
+        <button id="js-submit" type="submit">送信</button>
+    </form>
+    <script type="text/javascript" src="move.js"></script>
 </body>
 </html>

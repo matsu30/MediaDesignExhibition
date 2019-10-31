@@ -86,10 +86,10 @@ function init() {
 	const scene = new THREE.Scene();
 	// カメラを作成
 	const camera = new THREE.PerspectiveCamera(
-		45,
+		50,
 		width / height,
 		0.1,
-		10000
+		2000
 	);
 	// カメラの初期座標を設定
 	camera.position.set(0, 0, 25);
@@ -126,7 +126,7 @@ function init() {
 		
 		var randomX = getRandom( -x, x );
 		var randomY = getRandom( -y, y );
-		var randomZ = getRandom( -z+5, z+3 );
+		var randomZ = getRandom( -z+15, z+13 );
 
 		this.mesh.position.x = randomX;
 		this.mesh.position.y = randomY;
@@ -135,22 +135,34 @@ function init() {
 		this.mesh.rotation.y = Math.PI*2*Math.random();
 
 
-     ///////////////////////////////////////////////////////////
-	 //var tm = new TimelineMax({
-	 //	yoyo : true, 
-	 //	repeat : -1
-	 //});
-	 //tm.to( "#Heart", 1, {
-	 //	"y" : 50,
-	 //	ease : Power1.easeOut
-	 //});
+	//////////animation////////////////////////////////////////
+	 var tm = new TimelineMax({
+	 	yoyo : true, 
+		 repeat : -1,
+		 onUpdate: () =>{
+			 console.log('test');
+		 }
+	 });
 
+	 tm.to(this.mesh.position, 3, {
+	 	y : `+=${getRandom(2,0)}`,
+	 	ease : Back.easeInOut
+	 }, 'animate0');
     //////////////////////////////////////////////////////////////
 
 
 		//this.mesh.add(new THREE.Mesh(geom, mat));
 		this.loader.load('./models/glTF/Heart.glTF', object => {
+			var flag = true;
 			const heart = object.scene.children[0];
+			const loader = new THREE.TextureLoader();
+			var items = ['file2.jpg', '2-2-1.jpg'];
+			var random = Math.floor( Math.random() * items.length ); 
+			console.log( items[random] );
+			const texture = loader.load(items[random]);
+			heart.material = new THREE.MeshStandardMaterial({
+				map: texture
+			});
 			this.mesh.add(heart);
 		});
 	}
@@ -158,11 +170,7 @@ function init() {
 	// 3dsファイルのパスを指定
 	loader.load('./models/glTF/Heart.glTF', object => {
 			// 読み込み後に3D空間に追加
-			console.log(object.scene.children);
 			const heart = object.scene.children[0];
-		
-			//var geom = new THREE.BoxGeometry(2,2,2);
-			//var mat = new THREE.MeshPhongMaterial;
 
 		//クリック
 		btn.addEventListener('click', function() {
@@ -192,6 +200,7 @@ function init() {
 			var heart = new Heart(0xaa34f1, 15, 5, 10);
 
 			scene.add(heart.mesh);
+			objects.push(heart.mesh);
 	
 			console.log(objects);
 		}, false);
