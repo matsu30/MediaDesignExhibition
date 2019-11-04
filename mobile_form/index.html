@@ -14,10 +14,8 @@
     <div class="header">
         「<span class="suki">好き</span>」を「<span class="suki">かたち</span>」に。
     </div><!--/header-->
-
-
-    <form id="js-form" action="post-heart">
-        <canvas id="js-canvas" width="1" height="1"></canvas>
+    <canvas id="js-canvas" width="1000" height="1000"></canvas>
+    <form id="js-form" action="/api/postheart/">
         <div class="form">
                 <p><label class="form-label" for="title-field">好きなもの</label>
                 <input type="text" name="title" class="title" id="js-input">
@@ -33,11 +31,13 @@
             </div>  /bottun
         -->
 
-
-        <button id="js-submit" type="submit">送信する</button>
+        <div class="button_wrapper">
+            <button id="js-submit"  type="submit">送信する</button>
+        </div>
     </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script type="text/javascript" src="move.js"></script>
 
 </body>
+
 </html>
