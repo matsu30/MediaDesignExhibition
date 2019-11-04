@@ -19,6 +19,12 @@ form.addEventListener('submit', function(e) {
     const body = textarea.value;
     console.log(body);
 
+
+    //canvasの内容をbase64（文字列）にしてbase64という変数に入れておく
+    const base64 = canvas.toDataURL('image/jpeg');
+    
+    
+
 });
 
 
