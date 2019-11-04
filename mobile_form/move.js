@@ -23,7 +23,7 @@ form.addEventListener('submit', function(e) {
     //canvasの内容をbase64（文字列）にしてbase64という変数に入れておく
     const base64 = canvas.toDataURL('image/jpeg');
     
-    
+    console.log(axios);
 
 });
 
