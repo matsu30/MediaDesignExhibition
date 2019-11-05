@@ -33,4 +33,3 @@ window.onload = function(){
     console.log(img.src);
     
 };
-

@@ -1,6 +1,7 @@
 <?php
 ini_set('display_errors',1);
 var_dump($_POST);
+$name = uniqid(mt_rand());
 
 $data = $_POST['base64'];
 
@@ -21,7 +22,7 @@ if (preg_match('/^data:image\/(\w+);base64,/', $data, $type)) {
    throw new \Exception('did not match data URI with image data');
 }
 
-file_put_contents("img.{$type}", $data);
+file_put_contents("{$name}.{$type}", $data);
 
 
 $db = mysqli_connect('localhost', 'root', '', 'mydb') or 
@@ -33,7 +34,7 @@ $sql = sprintf('INSERT INTO suki SET title="%s",
                                      img="%s"',
      mysqli_real_escape_string($db, $_POST['title']),
      mysqli_real_escape_string($db, $_POST['body']),
-     mysqli_real_escape_string($db, 'img')
+     mysqli_real_escape_string($db, "{$name}")
 );
 
 mysqli_query($db, $sql) or die(mysqli_error($db));
