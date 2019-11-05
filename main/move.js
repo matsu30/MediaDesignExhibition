@@ -75,9 +75,13 @@ function init() {
 	// サイズを指定
 	const width = 860;
 	const height = 540;
+	//マウス管理
+	const mouse = new THREE.Vector2();
+	// canvas 要素の参照を取得する
+	const canvas = document.querySelector('#myCanvas');
 	// レンダラーを作成
 	const renderer = new THREE.WebGLRenderer({
-		canvas: document.querySelector('#myCanvas')
+		canvas: canvas
 	});
 	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(width, height);
@@ -95,13 +99,13 @@ function init() {
 	camera.position.set(0, 0, 25);
 	// カメラコントローラーを作成
 	const controls = new THREE.OrbitControls(camera);
-	// 平行光源を作成
-	const directionalLight = new THREE.DirectionalLight(0xffffff,0.5);
-	directionalLight.position.set(0, 1, 1);
-	scene.add(directionalLight);
-	// 環境光を追加
-	hemisphereLight = new THREE.HemisphereLight(0xf4cccc,0xffffff);
-	scene.add(hemisphereLight); 
+
+	//平行光源
+	//scene.add(new THREE.DirectionalLight(0xccc1c9, 5));
+	//環境光源
+	scene.add(new THREE.HemisphereLight(0xB04040, 0xFF9900, 0.4)); 
+	scene.add(new THREE.AmbientLight(0xF2E4EE, 1.5)); 
+	scene.fog = new THREE.Fog(0xF2E4EE, 15, 30);
 
 	// 3DS形式のモデルデータを読み込む
 	const loader = new THREE.GLTFLoader();
@@ -135,20 +139,20 @@ function init() {
 		this.mesh.rotation.y = Math.PI*2*Math.random();
 
 
-	//////////animation////////////////////////////////////////
-	 var tm = new TimelineMax({
-	 	yoyo : true, 
-		 repeat : -1,
-		 onUpdate: () =>{
-			 console.log('test');
-		 }
-	 });
+		//////////animation////////////////////////////////////////
+		var tm = new TimelineMax({
+			yoyo : true, 
+			repeat : -1,
+			onUpdate: () =>{
+				console.log('test');
+			}
+		});
 
-	 tm.to(this.mesh.position, 3, {
-	 	y : `+=${getRandom(2,0)}`,
-	 	ease : Back.easeInOut
-	 }, 'animate0');
-    //////////////////////////////////////////////////////////////
+		tm.to(this.mesh.position, 3, {
+			y : `+=${getRandom(2,0)}`,
+			ease : Back.easeInOut
+		}, 'animate0');
+		//////////////////////////////////////////////////////////////
 
 
 		//this.mesh.add(new THREE.Mesh(geom, mat));
@@ -156,7 +160,7 @@ function init() {
 			var flag = true;
 			const heart = object.scene.children[0];
 			const loader = new THREE.TextureLoader();
-			var items = ['file2.jpg', '2-2-1.jpg'];
+			var items = ['4232590685dc1210613812.jpeg'];
 			var random = Math.floor( Math.random() * items.length ); 
 			console.log( items[random] );
 			const texture = loader.load(items[random]);
@@ -207,17 +211,57 @@ function init() {
 	
 	});
 	
+	//追加//////////////////////////////////////////////////////////
 
-
-
-
+	const raycaster = new THREE.Raycaster();
+	canvas.addEventListener('mousemove', handleMouseMove);
 
 	tick();
+
+	// マウスを動かしたときのイベント
+	function handleMouseMove(event) {
+		const element = event.currentTarget;
+		// canvas要素上のXY座標
+		const x = event.clientX - element.offsetLeft;
+		const y = event.clientY - element.offsetTop;
+		// canvas要素の幅・高さ
+		const w = element.offsetWidth;
+		const h = element.offsetHeight;
+		// -1〜+1の範囲で現在のマウス座標を登録する
+		mouse.x = (x / w) * 2 - 1;
+		mouse.y = -(y / h) * 2 + 1;
+	}
+
+	////////////////////////////////////////////////////////////
+
+
 	// 毎フレーム時に実行されるループイベントです
 	function tick() {
-	// レンダリング
-	renderer.render(scene, camera);
-	requestAnimationFrame(tick);
+	
+		//追加//////////////////////////////////////////////////////////
+
+		// レイキャスト = マウス位置からまっすぐに伸びる光線ベクトルを生成
+		raycaster.setFromCamera(mouse, camera);
+		// その光線とぶつかったオブジェクトを得る
+		const intersects = raycaster.intersectObjects(objects);
+		objects.map(mesh => {
+			// 交差しているオブジェクトが1つ以上存在し、
+			// 交差しているオブジェクトの1番目(最前面)のものだったら
+			if (intersects.length > 0 && mesh === intersects[0].object) {
+			// 色を赤くする
+			mesh.material.color.setHex(0x9967af);
+			} else {
+			//それ以外は何もしない
+			;
+			}
+		});
+
+		/////////////////////////////////////////////////////////////////////
+
+		// レンダリング
+		renderer.render(scene, camera);
+		requestAnimationFrame(tick);
+
 	}
 
 	// 初期化のために実行
@@ -248,7 +292,7 @@ function init() {
 	//現在時刻を表示する関数
 	function showNowDate(){
 		const number = Object.keys(objects).length;
-		if(number >= 50){
+		if(number >= 100){
 			scene.remove(objects[0]);
 			objects.shift();
 		};
@@ -265,6 +309,7 @@ function init() {
 		
 	//},false);
 };
+
 
 //////////////////////////////////////////////////////////////////////
 

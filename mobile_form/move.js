@@ -27,16 +27,17 @@ form.addEventListener('submit', function(e) {
         // 塗り色を決める
         context.fillStyle = "#F5D8E8";
         // canvasの左から0、上から0の位置に幅 width、高さ heightの塗りつぶしの四角形を描く
-        context.fillRect(0, 0, 1000, 1000);
+        context.fillRect(0, 0, 1024, 1024);
     
         // 以降の塗り色を決める
         context.fillStyle = "#000000";
     
+        context.scale(1, -1);
         context.font = "bold 600px sans-serif";
         context.textAlign = 'center';
         context.textBaseline = 'middle';
         context.fillStyle = '#EDA8CD';
-        context.fillText(title, 500, 500, 1000);
+        context.fillText(title, 512, -512, 1024);
     
         // 空のimg要素を作る
         const img = new Image();
