@@ -39,9 +39,3 @@ $sql = sprintf('INSERT INTO suki SET title="%s",
 
 mysqli_query($db, $sql) or die(mysqli_error($db));
 ?>
-
-<?php
-// $db = mysqli_connect('localhost', 'root', '', 'mydb') or 
-// die(mysqli_connect_error());
-// mysqli_set_charset($db, 'utf8');
-?>

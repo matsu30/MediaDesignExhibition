@@ -249,7 +249,7 @@ function init() {
 			// 交差しているオブジェクトの1番目(最前面)のものだったら
 			if (intersects.length > 0 && mesh === intersects[0].object) {
 			// 色を赤くする
-			mesh.material.color.setHex(0x9967af);
+			//heart.material.color.setHex(0x9967af);
 			} else {
 			//それ以外は何もしない
 			;
