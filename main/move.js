@@ -96,16 +96,20 @@ function init() {
 		2000
 	);
 	// カメラの初期座標を設定
-	camera.position.set(0, 0, 25);
+	camera.position.set(0, 0, 15);
 	// カメラコントローラーを作成
-	const controls = new THREE.OrbitControls(camera);
+	const controls = new THREE.OrbitControls(camera, renderer.domElement);
+	controls.minDistance = 10;
+	controls.maxDistance = 25
+	controls.maxPolarAngle = Math.PI * ( 2 / 3) ;
+	controls.minPolarAngle = Math.PI * ( 1 / 3) ;
 
 	//平行光源
 	//scene.add(new THREE.DirectionalLight(0xccc1c9, 5));
 	//環境光源
 	scene.add(new THREE.HemisphereLight(0xB04040, 0xFF9900, 0.4)); 
 	scene.add(new THREE.AmbientLight(0xF2E4EE, 1.5)); 
-	scene.fog = new THREE.Fog(0xF2E4EE, 15, 30);
+	scene.fog = new THREE.Fog(0xF2E4EE, 10, 30);
 
 	// 3DS形式のモデルデータを読み込む
 	const loader = new THREE.GLTFLoader();
@@ -118,7 +122,6 @@ function init() {
 
 		this.loader = new THREE.GLTFLoader();
 		this.mesh = new THREE.Object3D(); 
-		var geom = new THREE.BoxGeometry(2,2,2);
 		var mat = new THREE.MeshPhongMaterial({
 			color:c,
 		});
@@ -130,7 +133,7 @@ function init() {
 		
 		var randomX = getRandom( -x, x );
 		var randomY = getRandom( -y, y );
-		var randomZ = getRandom( -z+15, z+13 );
+		var randomZ = getRandom( z-10, z+10 );
 
 		this.mesh.position.x = randomX;
 		this.mesh.position.y = randomY;
@@ -144,7 +147,7 @@ function init() {
 			yoyo : true, 
 			repeat : -1,
 			onUpdate: () =>{
-				console.log('test');
+			;
 			}
 		});
 
@@ -170,6 +173,18 @@ function init() {
 			this.mesh.add(heart);
 		});
 	}
+
+	//////////////////////////////////////
+
+	var geom = new THREE.BoxGeometry(4,4,.2);
+	const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+	const ms = new THREE.Mesh(geom, material);
+	scene.add(ms);
+	objects.push(ms);
+
+
+
+	////////////////////////////////////////////
 
 	// 3dsファイルのパスを指定
 	loader.load('./models/glTF/Heart.glTF', object => {
@@ -201,20 +216,20 @@ function init() {
 			// 3D空間にオブジェクトを追加
 			//scene.add(cloneObject);
 			//scene.add(mesh);
-			var heart = new Heart(0xaa34f1, 15, 5, 10);
+			var heart = new Heart(0xaa34f1, 10, 5, 0);
 
 			scene.add(heart.mesh);
 			objects.push(heart.mesh);
 	
 			console.log(objects);
-		}, false);
+		},  {passive: false});
 	
 	});
 	
 	//追加//////////////////////////////////////////////////////////
 
 	const raycaster = new THREE.Raycaster();
-	canvas.addEventListener('mousemove', handleMouseMove);
+	canvas.addEventListener('mousemove', handleMouseMove,  {passive: false});
 
 	tick();
 
@@ -245,22 +260,25 @@ function init() {
 		// その光線とぶつかったオブジェクトを得る
 		const intersects = raycaster.intersectObjects(objects);
 		objects.map(mesh => {
-			// 交差しているオブジェクトが1つ以上存在し、
-			// 交差しているオブジェクトの1番目(最前面)のものだったら
-			if (intersects.length > 0 && mesh === intersects[0].object) {
-			// 色を赤くする
-			//heart.material.color.setHex(0x9967af);
-			} else {
-			//それ以外は何もしない
-			;
-			}
-		});
+			// // 交差しているオブジェクトが1つ以上存在し、
+			// // 交差しているオブジェクトの1番目(最前面)のものだったら
+			// if (intersects.length > 0 && mesh === intersects[0].object) {
+			// // 色を赤くする
+			console.log(intersects.length);
+			// } else {
+			// //それ以外は何もしない
+			// ;
+			});
+		// });
 
 		/////////////////////////////////////////////////////////////////////
+
+
 
 		// レンダリング
 		renderer.render(scene, camera);
 		requestAnimationFrame(tick);
+
 
 	}
 
