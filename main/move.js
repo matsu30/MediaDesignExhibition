@@ -176,11 +176,11 @@ function init() {
 
 	//////////////////////////////////////
 
-	var geom = new THREE.BoxGeometry(4,4,.2);
-	const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
-	const ms = new THREE.Mesh(geom, material);
-	scene.add(ms);
-	objects.push(ms);
+	// var geom = new THREE.BoxGeometry(4,4,.2);
+	// const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+	// const ms = new THREE.Mesh(geom, material);
+	// scene.add(ms);
+	// objects.push(ms);
 
 
 
@@ -258,8 +258,8 @@ function init() {
 		// レイキャスト = マウス位置からまっすぐに伸びる光線ベクトルを生成
 		raycaster.setFromCamera(mouse, camera);
 		// その光線とぶつかったオブジェクトを得る
-		const intersects = raycaster.intersectObjects(objects);
-		objects.map(mesh => {
+		const intersects = raycaster.intersectObjects(objects, true);
+		objects.map(heart => {
 			// // 交差しているオブジェクトが1つ以上存在し、
 			// // 交差しているオブジェクトの1番目(最前面)のものだったら
 			// if (intersects.length > 0 && mesh === intersects[0].object) {
