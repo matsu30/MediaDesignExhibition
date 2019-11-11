@@ -117,9 +117,6 @@ function init() {
 	//loader.setPath('./models');
 
 	Heart = function(c,x,y,z){
-
-		console.log(c,x,y,z);
-
 		this.loader = new THREE.GLTFLoader();
 		this.mesh = new THREE.Object3D(); 
 		var mat = new THREE.MeshPhongMaterial({
@@ -199,6 +196,7 @@ function init() {
 			//geometry = new THREE.BoxGeometry(100, 100, 100);
 			//material = new THREE.MeshBasicMaterial({color: 0x6699FF});
 			//var cloneObject =  new THREE.Mesh(geom, mat);
+
 			var randomX = getRandom( -15, 15 );
 			var randomY = getRandom( -5, 5 );
 			var randomZ = getRandom( -5, 13 );
@@ -216,16 +214,17 @@ function init() {
 			// 3D空間にオブジェクトを追加
 			//scene.add(cloneObject);
 			//scene.add(mesh);
+
 			var heart = new Heart(0xaa34f1, 10, 5, 0);
 
 			scene.add(heart.mesh);
 			objects.push(heart.mesh);
-	
+		
 			console.log(objects);
 		},  {passive: false});
 	
 	});
-	
+
 	//追加//////////////////////////////////////////////////////////
 
 	const raycaster = new THREE.Raycaster();
@@ -260,16 +259,16 @@ function init() {
 		// その光線とぶつかったオブジェクトを得る
 		const intersects = raycaster.intersectObjects(objects, true);
 		objects.map(heart => {
-			// // 交差しているオブジェクトが1つ以上存在し、
-			// // 交差しているオブジェクトの1番目(最前面)のものだったら
-			// if (intersects.length > 0 && mesh === intersects[0].object) {
-			// // 色を赤くする
+			// 交差しているオブジェクトが1つ以上存在し、
+			// 交差しているオブジェクトの1番目(最前面)のものだったら
+			if (intersects.length > 0 && heart.mesh === intersects[0].object) {
+			// コンソール
 			console.log(intersects.length);
-			// } else {
-			// //それ以外は何もしない
-			// ;
-			});
-		// });
+			 } else {
+			//それ以外は何もしない
+			;
+			};
+		});
 
 		/////////////////////////////////////////////////////////////////////
 
