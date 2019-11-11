@@ -1,43 +1,32 @@
 <?php
+ini_set('display_errors',1);
 
-/*
-if( $file_handle = fopen( FILENAME,'r') ) {
-	while( $data = fgets($file_handle) ){
-	
-		$split_data = preg_split( '/\'/', $data);
-	
-		$message = array(
-			'view_name' => $split_data[1],
-			'message' => $split_data[3],
-			'post_date' => $split_data[5]
-		);
-		array_unshift( $message_array, $message);
-	}
+$db = mysqli_connect('localhost', 'root', '', 'mydb') or 
+die(mysqli_connect_error());
+mysqli_set_charset($db, 'utf8');
 
-	// ファイルを閉じる
-	fclose( $file_handle);
-}
-*/
+$sql = 'SELECT * FROM `suki` order by id DESC LIMIT 80 ';
 
-// データベースに接続
-$mysqli = new mysqli( 'localhost', 'root', '', 'mydb');
 
-// 接続エラーの確認
-if( $mysqli->connect_errno ) {
-	$error_message[] = 'データの読み込みに失敗しました。 エラー番号 '.$mysqli->connect_errno.' : '.$mysqli->connect_error;
-} else {
-    
-    $sql = "SELECT * FROM suki ORDER BY title DESC";
-	$res = $mysqli->query($sql);
-	
-	if( $res ) {
-		$message_array = $res->fetch_all(MYSQLI_ASSOC);
-	}
-	
-    $mysqli->close();
-    
-}
+// SQLを実行、結果を&resultという名前の変数に入れる
+$result =  mysqli_query($db, $sql) or die(mysqli_error($db));
 
-//wakaranai
+// SQLで取得したデータを保存する変数
+$myArray = array();
 
+if($result) {
+	// SQLが正常に処理された時の処理
+	while ($row = mysqli_fetch_assoc($result)) {
+		//データベースから取得したデータを配列に突っ込む
+		$myArray[] = $row;
+	};
+};
+
+
+// JSON形式でブラウザに返す
+header('Content-Type: application/json; charest=UTF-8');
+echo json_encode($myArray);
 ?>
+
+
+

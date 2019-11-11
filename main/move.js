@@ -221,9 +221,10 @@ function init() {
 			objects.push(heart.mesh);
 		
 			console.log(objects);
-		},  {passive: false});
+
+		});
+	},  {passive: false});
 	
-	});
 
 	//追加//////////////////////////////////////////////////////////
 
@@ -309,7 +310,7 @@ function init() {
 	//現在時刻を表示する関数
 	function showNowDate(){
 		const number = Object.keys(objects).length;
-		if(number >= 100){
+		if(number >= 80){
 			scene.remove(objects[0]);
 			objects.shift();
 		};
@@ -330,3 +331,14 @@ function init() {
 
 //////////////////////////////////////////////////////////////////////
 
+
+axios.post('/MediaDesignExhibition/api/getheart')
+			.then(function (response) {
+			// データの送信に成功したときの処理をここに書く
+				console.log(response);
+				console.log(response.data[0].title);
+			})
+			.catch(function (error) {
+			// データの送信に失敗したときの処理をここに書く
+				console.log(error);
+			});

@@ -46,6 +46,10 @@ input[type="text"]{
     outline: none;
 }
 
+.usui{
+    color: #BDBDBD;
+}
+
 textarea{
     padding: 0.8em;
     outline: none;
