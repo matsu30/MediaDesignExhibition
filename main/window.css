@@ -1,0 +1,110 @@
+@charset "utf-8";
+
+
+html,body {
+    font-family: 'Kosugi Maru', sans-serif;
+    background-color: #F2E4EE;
+    margin: 0;
+    color: #707070;
+  }
+
+.suki{
+    color:#EDA8CD; 
+}
+
+.header{
+  /*position: fixed;*/
+    width: 100%;
+    background-color: #C63967;
+    color: #ffffff;
+    font-size: 40px;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    z-index: 1;
+}
+
+.comment{
+    position: fixed;
+    width: auto;
+    height: 70%;
+    margin: 5vh 20%;
+    background-color: #fff;
+    overflow-y: auto; /* メニューが多くなったらスクロールできるように */
+    color: #707070;
+    z-index: 2;
+    border-radius: 50px;
+    transition: all .6s;
+    padding: 3vh 5vh 0vh 7vh;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.grid-Container {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 15% 85%;
+}
+
+.grid-img{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    margin: 0px 10px 20px 0px;
+    position: relative;
+    width: 300px;
+    /* background-color:aliceblue; */
+}
+
+.HImg{
+    padding: 0vh 0vh 15vh 0vh;
+    transform: scale(1, -1);
+}
+
+.grid-title{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin: 5% 5% 5% 30%;
+    background-color: #F5D8E8;
+    border-radius: 50px;
+    padding:20px 0px 40px 0px;
+    font-size: 20px;
+    text-align:center;
+    /* background-color:lightcyan; */
+}
+
+.grid-comment{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    margin-top: 10px;
+    /* background-color:lightcyan; */
+}
+
+.comment-text{
+    margin: 5% 5% 5% 30%;
+    background-color: #F5D8E8;
+    border-radius: 50px;
+    padding:60px;
+    font-size: 15px;
+    min-height: 350px;
+}
+
+.kirinuki{
+    position: absolute;
+    top: 136px;
+    left: 0;
+};
+
+.fotter{
+    width: 100%;
+    background-color: #C63967;
+    position: absolute;/*←絶対位置*/
+    bottom: 0;
+    font-size: 6px;
+    padding: 15px 0px 15px 0px;
+    z-index: 1;
+}

@@ -154,13 +154,24 @@ function init() {
 		}, 'animate0');
 		//////////////////////////////////////////////////////////////
 
+		axios.post('/MediaDesignExhibition/api/getheart')
+		.then(function (response) {
+		// データの送信に成功したときの処理をここに書く
+			console.log(response);
+			console.log(response.data[0].img);
+		})
+		.catch(function (error) {
+		// データの送信に失敗したときの処理をここに書く
+			console.log(error);
+		});
+
 
 		//this.mesh.add(new THREE.Mesh(geom, mat));
 		this.loader.load('./models/glTF/Heart.glTF', object => {
 			var flag = true;
 			const heart = object.scene.children[0];
 			const loader = new THREE.TextureLoader();
-			var items = ['4232590685dc1210613812.jpeg'];
+			var items = [response.data[0].img + '.jpeg'];
 			var random = Math.floor( Math.random() * items.length ); 
 			console.log( items[random] );
 			const texture = loader.load(items[random]);
@@ -169,6 +180,9 @@ function init() {
 			});
 			this.mesh.add(heart);
 		});
+
+
+
 	}
 
 	//////////////////////////////////////
@@ -331,14 +345,3 @@ function init() {
 
 //////////////////////////////////////////////////////////////////////
 
-
-axios.post('/MediaDesignExhibition/api/getheart')
-			.then(function (response) {
-			// データの送信に成功したときの処理をここに書く
-				console.log(response);
-				console.log(response.data[0].title);
-			})
-			.catch(function (error) {
-			// データの送信に失敗したときの処理をここに書く
-				console.log(error);
-			});
