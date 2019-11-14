@@ -117,7 +117,7 @@ function init() {
 	//loader.setPath('./models');
 
 	Heart = function(c,x,y,z){
-		this.loader = new THREE.GLTFLoader();
+		
 		this.mesh = new THREE.Object3D(); 
 		var mat = new THREE.MeshPhongMaterial({
 			color:c,
@@ -156,31 +156,31 @@ function init() {
 
 		axios.post('/MediaDesignExhibition/api/getheart')
 		.then(function (response) {
-		// データの送信に成功したときの処理をここに書く
+			// データの送信に成功したときの処理をここに書く
 			console.log(response);
 			console.log(response.data[0].img);
+
+
+			Heart.loader = new THREE.GLTFLoader();
+			Heart.loader.load('./models/glTF/Heart.glTF', object => {
+				var flag = true;
+				const heart = object.scene.children[0];
+				const loader = new THREE.TextureLoader();
+				var items = ['/MediaDesignExhibition/api/postheart/' + response.data[0].img + '.jpeg'];
+				var random = Math.floor( Math.random() * items.length ); 
+				console.log( items[random] );
+				const texture = loader.load(items[random]);
+				heart.material = new THREE.MeshStandardMaterial({
+					map: texture
+				});
+				Heart.mesh.add(heart);
+			});
+
 		})
 		.catch(function (error) {
-		// データの送信に失敗したときの処理をここに書く
+			// データの送信に失敗したときの処理をここに書く
 			console.log(error);
 		});
-
-
-		//this.mesh.add(new THREE.Mesh(geom, mat));
-		this.loader.load('./models/glTF/Heart.glTF', object => {
-			var flag = true;
-			const heart = object.scene.children[0];
-			const loader = new THREE.TextureLoader();
-			var items = [response.data[0].img + '.jpeg'];
-			var random = Math.floor( Math.random() * items.length ); 
-			console.log( items[random] );
-			const texture = loader.load(items[random]);
-			heart.material = new THREE.MeshStandardMaterial({
-				map: texture
-			});
-			this.mesh.add(heart);
-		});
-
 
 
 	}
@@ -330,18 +330,8 @@ function init() {
 		};
 	  };
 
-	//var btndel = document.getElementById('btn-delete');
-	//btndel.addEventListener('click', function() {
-		//console.log('クリックされました！');
-
-		//scene.remove(objects[0]);
-		//objects.shift();
-		//mesh.material.dispose();
-		//mesh.geometry.dispose();
-		
-	//},false);
 };
 
 
-//////////////////////////////////////////////////////////////////////
+
 
