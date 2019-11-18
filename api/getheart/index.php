@@ -6,7 +6,8 @@ die(mysqli_connect_error());
 mysqli_set_charset($db, 'utf8');
 
 $sql = sprintf(
-	'SELECT * FROM `suki` order by id DESC LIMIT 10 OFFSET %d',
+	'SELECT * FROM `suki` order by id DESC LIMIT %d OFFSET %d',
+	mysqli_real_escape_string($db, $_GET['limit']),
 	mysqli_real_escape_string($db, $_GET['offset'])
 );
 
