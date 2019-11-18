@@ -32,9 +32,9 @@ function toggleNav() {
 		onComplete: function() {
 		  body.classList.remove("nav-open-2");
 		}
-	  });
+	});
   
-	  if (body.classList.contains("nav-open-2")) {
+	if (body.classList.contains("nav-open-2")) {
 		// .global-nav--2 が開いて入ればこの中を処理する
 		// .global-nav--2 を隠す
 		tl.to(".global-nav--2", 0.6, { right: -740 });
@@ -52,9 +52,9 @@ function toggleNav() {
 		onComplete: function() {
 		  body.classList.remove("nav-open-1");
 		}
-	  });
+	});
   
-	  if (body.classList.contains("nav-open-1")) {
+	if (body.classList.contains("nav-open-1")) {
 		// .global-nav--1 が開いて入ればこの中を処理する
 		// .global-nav--1 を隠す
 		tl.to(".global-nav--1", 0.6, { right: -740 });
@@ -62,11 +62,11 @@ function toggleNav() {
 	  // .global-nav--2 を表示する
 	  tl.to(".global-nav--2", 0.6, { right: 0 });
 	});
-  }
+}
   
-  toggleNav();
+toggleNav();
   
- // ここからtree.jsの処理
+// ここからtree.jsの処理
 window.addEventListener('load', init);
 
 const objects = []; // 生成したハートを入れておく配列
@@ -111,78 +111,46 @@ function init() {
 	scene.add(new THREE.AmbientLight(0xF2E4EE, 1.5)); 
 	scene.fog = new THREE.Fog(0xF2E4EE, 10, 30);
 
-	// 3DS形式のモデルデータを読み込む
-	const loader = new THREE.GLTFLoader();
-	// テクスチャーのパスを指定
-	//loader.setPath('./models');
-
-	Heart = function(c,x,y,z){
+	Heart = function(x, y, z, t){
 		
 		this.mesh = new THREE.Object3D(); 
-		var mat = new THREE.MeshPhongMaterial({
-			color:c,
+
+		function getRandom(min, max) {
+			return Math.floor(Math.random() * (max + 1 - min)) + min;
+		}
+
+		const randomX = getRandom(-x, x);
+		const randomY = getRandom(-y, y);
+		const randomZ = getRandom(z - 10, z + 10);
+
+		const tm = new TimelineMax({
+			yoyo: true, 
+			repeat: -1
 		});
 
-
-		function getRandom( min, max ) {
-			return Math.floor( Math.random() * (max + 1 - min) ) + min;
-		}
-		
-		var randomX = getRandom( -x, x );
-		var randomY = getRandom( -y, y );
-		var randomZ = getRandom( z-10, z+10 );
+		const loader = new THREE.GLTFLoader();
 
 		this.mesh.position.x = randomX;
 		this.mesh.position.y = randomY;
 		this.mesh.position.z = randomZ;
 
-		this.mesh.rotation.y = Math.PI*2*Math.random();
-
-
-		//////////animation////////////////////////////////////////
-		var tm = new TimelineMax({
-			yoyo : true, 
-			repeat : -1,
-			onUpdate: () =>{
-			;
-			}
-		});
+		this.mesh.rotation.y = Math.PI * 2 * Math.random();
 
 		tm.to(this.mesh.position, 3, {
-			y : `+=${getRandom(2,0)}`,
-			ease : Back.easeInOut
+			y: `+=${getRandom(2,0)}`,
+			ease: Back.easeInOut
 		}, 'animate0');
-		//////////////////////////////////////////////////////////////
 
-		axios.post('/MediaDesignExhibition/api/getheart')
-		.then(function (response) {
-			// データの送信に成功したときの処理をここに書く
-			console.log(response);
-			console.log(response.data[0].img);
-
-
-			Heart.loader = new THREE.GLTFLoader();
-			Heart.loader.load('./models/glTF/Heart.glTF', object => {
-				var flag = true;
-				const heart = object.scene.children[0];
-				const loader = new THREE.TextureLoader();
-				var items = ['/MediaDesignExhibition/api/postheart/' + response.data[0].img + '.jpeg'];
-				var random = Math.floor( Math.random() * items.length ); 
-				console.log( items[random] );
-				const texture = loader.load(items[random]);
-				heart.material = new THREE.MeshStandardMaterial({
-					map: texture
-				});
-				Heart.mesh.add(heart);
+		loader.load('./models/glTF/Heart.glTF', object => {
+			const heart = object.scene.children[0];
+			const loader = new THREE.TextureLoader();
+			const item = '/MediaDesignExhibition/api/postheart/' + t + '.jpeg';
+			const texture = loader.load(item);
+			heart.material = new THREE.MeshStandardMaterial({
+				map: texture
 			});
-
-		})
-		.catch(function (error) {
-			// データの送信に失敗したときの処理をここに書く
-			console.log(error);
+			this.mesh.add(heart);
 		});
-
-
 	}
 
 	//////////////////////////////////////
@@ -193,54 +161,19 @@ function init() {
 	// scene.add(ms);
 	// objects.push(ms);
 
-
-
 	////////////////////////////////////////////
 
-	// 3dsファイルのパスを指定
-	loader.load('./models/glTF/Heart.glTF', object => {
-			// 読み込み後に3D空間に追加
-			const heart = object.scene.children[0];
 
-		//クリック
-		btn.addEventListener('click', function() {
-
-			console.log('クリックされました！');
-
-			//geometry = new THREE.BoxGeometry(100, 100, 100);
-			//material = new THREE.MeshBasicMaterial({color: 0x6699FF});
-			//var cloneObject =  new THREE.Mesh(geom, mat);
-
-			var randomX = getRandom( -15, 15 );
-			var randomY = getRandom( -5, 5 );
-			var randomZ = getRandom( -5, 13 );
-			function getRandom( min, max ) {
-				var randomX = Math.floor( Math.random() * (max + 1 - min) ) + min;
-				return randomX;
-			}
-
-			console.log( randomX,randomY,randomZ );
-			// メッシュを作成
-			//const mesh = new THREE.Mesh(geometry, material);
-			//cloneObject.position.set(randomX,randomY,randomZ);
-
-			//objects.push(cloneObject);
-			// 3D空間にオブジェクトを追加
-			//scene.add(cloneObject);
-			//scene.add(mesh);
-
-			var heart = new Heart(0xaa34f1, 10, 5, 0);
-
-			scene.add(heart.mesh);
-			objects.push(heart.mesh);
+	//クリック
+	var btn = document.getElementById('btn');
+	btn.addEventListener('click', function() {
+		const heart = new Heart(10, 5, 0, '18983128465dd21e0747e37');
 		
-			console.log(objects);
+		scene.add(heart.mesh);
+		objects.push(heart.mesh);
 
-		});
-	},  {passive: false});
-	
-
-	//追加//////////////////////////////////////////////////////////
+		console.log(objects);
+	});
 
 	const raycaster = new THREE.Raycaster();
 	canvas.addEventListener('mousemove', handleMouseMove,  {passive: false});
@@ -261,14 +194,8 @@ function init() {
 		mouse.y = -(y / h) * 2 + 1;
 	}
 
-	////////////////////////////////////////////////////////////
-
-
 	// 毎フレーム時に実行されるループイベントです
 	function tick() {
-	
-		//追加//////////////////////////////////////////////////////////
-
 		// レイキャスト = マウス位置からまっすぐに伸びる光線ベクトルを生成
 		raycaster.setFromCamera(mouse, camera);
 		// その光線とぶつかったオブジェクトを得る
@@ -277,23 +204,13 @@ function init() {
 			// 交差しているオブジェクトが1つ以上存在し、
 			// 交差しているオブジェクトの1番目(最前面)のものだったら
 			if (intersects.length > 0 && heart.mesh === intersects[0].object) {
-			// コンソール
-			console.log(intersects.length);
-			 } else {
-			//それ以外は何もしない
-			;
-			};
+				console.log(intersects.length);
+			} 
 		});
-
-		/////////////////////////////////////////////////////////////////////
-
-
 
 		// レンダリング
 		renderer.render(scene, camera);
 		requestAnimationFrame(tick);
-
-
 	}
 
 	// 初期化のために実行
@@ -312,24 +229,38 @@ function init() {
 		camera.updateProjectionMatrix();
 	}
 
-	var btn = document.getElementById('btn');
-	//let mesh;
-	//let geometry;
-	//let material;
-	
-
-	setInterval(showNowDate, 1000);
-
-	   
 	//現在時刻を表示する関数
 	function showNowDate(){
-		const number = Object.keys(objects).length;
-		if(number >= 80){
+
+		axios.post('/MediaDesignExhibition/api/getheart')
+		.then(function (response) {
+			// データの送信に成功したときの処理をここに書く
+			console.log(response);
+			console.log(response.data[0].img);
+
+			for (var i = 0; i < response.data.length; i++) {
+				console.log(i);
+
+				// const heart = new Heart(10, 5, 0, '18983128465dd21e0747e37');
+				// scene.add(heart.mesh);
+				// objects.push(heart.mesh);
+			}
+		})
+		.catch(function (error) {
+			// データの送信に失敗したときの処理をここに書く
+			console.log(error);
+		});
+
+
+
+
+		if(objects.length >= 80){
 			scene.remove(objects[0]);
 			objects.shift();
 		};
-	  };
+	};
 
+	setInterval(showNowDate, 1000);
 };
 
 

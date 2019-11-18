@@ -5,8 +5,10 @@ $db = mysqli_connect('localhost', 'root', '', 'mydb') or
 die(mysqli_connect_error());
 mysqli_set_charset($db, 'utf8');
 
-$sql = 'SELECT * FROM `suki` order by id DESC LIMIT 80 ';
-
+$sql = sprintf(
+	'SELECT * FROM `suki` order by id DESC LIMIT 10 OFFSET %d',
+	mysqli_real_escape_string($db, $_GET['offset'])
+);
 
 // SQLを実行、結果を&resultという名前の変数に入れる
 $result =  mysqli_query($db, $sql) or die(mysqli_error($db));
