@@ -1,0 +1,58 @@
+@charset "utf-8";
+
+
+html,body {
+  font-family: 'Kosugi Maru', sans-serif;
+  background-color: #F2E4EE;
+  margin: 0;
+  font-size: 15px;
+  text-align: center;
+  color: #707070;
+}
+
+.suki{
+  color:#EDA8CD; 
+}
+
+.header{
+/*position: fixed;*/
+  position: fixed;
+  width: 100%;
+  background-color: #C63967;
+  color: #ffffff;
+  font-size: 15px;
+  text-align: center;
+  padding: 15px 0px 15px 0px;
+}
+
+.image01{
+  padding-top: 60px;
+  padding-bottom: 0px;
+}
+
+.image{
+  padding-top: 100px;
+  padding-bottom: 20px;
+}
+
+.under{
+  padding-bottom: 200px;
+}
+
+.fixed {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.btn{
+  font-size: 15px;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: solid 3px #EDA8CD;
+  text-decoration: none;
+  color: #707070;
+  background: #ffffff;
+  margin: 50px;
+}
