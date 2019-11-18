@@ -112,7 +112,7 @@ function init() {
 	scene.fog = new THREE.Fog(0xF2E4EE, 10, 30);
 
 	Heart = function(x, y, z, t){
-		
+		this.id = t;
 		this.mesh = new THREE.Object3D(); 
 
 		function getRandom(min, max) {
@@ -144,7 +144,7 @@ function init() {
 		loader.load('./models/glTF/Heart.glTF', object => {
 			const heart = object.scene.children[0];
 			const loader = new THREE.TextureLoader();
-			const item = '/MediaDesignExhibition/api/postheart/' + t + '.jpeg';
+			const item = '/api/postheart/images/' + t + '.jpeg';
 			const texture = loader.load(item);
 			heart.material = new THREE.MeshStandardMaterial({
 				map: texture
@@ -165,15 +165,15 @@ function init() {
 
 
 	//クリック
-	var btn = document.getElementById('btn');
-	btn.addEventListener('click', function() {
-		const heart = new Heart(10, 5, 0, '18983128465dd21e0747e37');
+	// var btn = document.getElementById('btn');
+	// btn.addEventListener('click', function() {
+	// 	const heart = new Heart(10, 5, 0, '14009456205dd266546b8f9');
 		
-		scene.add(heart.mesh);
-		objects.push(heart.mesh);
+	// 	scene.add(heart.mesh);
+	// 	objects.push(heart.mesh);
 
-		console.log(objects);
-	});
+	// 	console.log(objects);
+	// });
 
 	const raycaster = new THREE.Raycaster();
 	canvas.addEventListener('mousemove', handleMouseMove,  {passive: false});
@@ -229,21 +229,29 @@ function init() {
 		camera.updateProjectionMatrix();
 	}
 
+	let limit = 80;
+	let offset = 0;
+
+
 	//現在時刻を表示する関数
 	function showNowDate(){
 
-		axios.post('/MediaDesignExhibition/api/getheart')
+		axios.get(`/api/getheart?limit=${limit}&offset=${offset}`)
 		.then(function (response) {
 			// データの送信に成功したときの処理をここに書く
 			console.log(response);
 			console.log(response.data[0].img);
 
-			for (var i = 0; i < response.data.length; i++) {
-				console.log(i);
-
-				// const heart = new Heart(10, 5, 0, '18983128465dd21e0747e37');
-				// scene.add(heart.mesh);
-				// objects.push(heart.mesh);
+			limit = 1;
+			
+			if (objects.length === 0) {
+				for (var i = 0; i < response.data.length; i++) {
+					console.log(i);
+				}
+			} else if (objects[0].id !== objects[0].id){
+				const heart = new Heart(10, 5, 0, response.data[0].img);
+				scene.add(heart.mesh);
+				objects.push(heart.mesh);
 			}
 		})
 		.catch(function (error) {
