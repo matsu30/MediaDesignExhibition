@@ -164,10 +164,10 @@ function init() {
 	////////////////////////////////////////////
 
 
-	//クリック
+	// クリック
 	// var btn = document.getElementById('btn');
 	// btn.addEventListener('click', function() {
-	// 	const heart = new Heart(10, 5, 0, '14009456205dd266546b8f9');
+	// 	const heart = new Heart(10, 5, 0, '10754118445dd3a1c74bc7d');
 		
 	// 	scene.add(heart.mesh);
 	// 	objects.push(heart.mesh);
@@ -239,28 +239,45 @@ function init() {
 		axios.get(`/api/getheart?limit=${limit}&offset=${offset}`)
 		.then(function (response) {
 			// データの送信に成功したときの処理をここに書く
+			var num1 = parseInt(objects.length);
+			var num2 = parseInt(response.data[num1].id);
+			var plus = num1 + num2;
 			console.log(response);
 			console.log(response.data[0].img);
+			console.log(response.data[0].id);
+			console.log(num1);
+			console.log(num2);
+			console.log(num1 + num2);
 
-			limit = 1;
+
+			limit = 80;
 			
 			if (objects.length === 0) {
 				for (var i = 0; i < response.data.length; i++) {
 					console.log(i);
+					console.log(response.data[i].id);
+					const heart = new Heart(10, 5, 0, response.data[i].img);
+					scene.add(heart.mesh);
+					objects.push(heart.mesh);
+					console.log('追加された');
 				}
-			} else if (objects[0].id !== objects[0].id){
+			} else if(response.data[0].id == plus){
 				const heart = new Heart(10, 5, 0, response.data[0].img);
 				scene.add(heart.mesh);
 				objects.push(heart.mesh);
+				console.log('追加されたyo');
 			}
+			// } else if (objects[0].id !== objects[0].id){
+			// 	const heart = new Heart(10, 5, 0, response.data[0].img);
+			// 	scene.add(heart.mesh);
+			// 	objects.push(heart.mesh);
+			// 	console.log('追加されたよ');
+			// }
 		})
 		.catch(function (error) {
 			// データの送信に失敗したときの処理をここに書く
 			console.log(error);
 		});
-
-
-
 
 		if(objects.length >= 80){
 			scene.remove(objects[0]);
