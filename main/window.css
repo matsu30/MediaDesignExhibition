@@ -25,23 +25,23 @@ html,body {
 
 .comment{
     position: fixed;
-    width: auto;
+    width: 700px;
     height: 70%;
-    margin: 5vh 20%;
+    margin: 40px 300px;
     background-color: #fff;
     overflow-y: auto; /* メニューが多くなったらスクロールできるように */
     color: #707070;
     z-index: 2;
     border-radius: 50px;
     transition: all .6s;
-    padding: 3vh 5vh 0vh 7vh;
+    padding: 30px 30px 30px 30px;
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
 
 .grid-Container {
     display: grid;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 30% 70%;
     grid-template-rows: 15% 85%;
 }
 
@@ -88,14 +88,14 @@ html,body {
     margin: 5% 5% 5% 30%;
     background-color: #F5D8E8;
     border-radius: 50px;
-    padding:60px;
+    padding:25px;
     font-size: 15px;
     min-height: 350px;
 }
 
 .kirinuki{
     position: absolute;
-    top: 136px;
+    top: 50px;
     left: 0;
 };
 

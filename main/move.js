@@ -163,18 +163,6 @@ function init() {
 
 	////////////////////////////////////////////
 
-
-	// クリック
-	// var btn = document.getElementById('btn');
-	// btn.addEventListener('click', function() {
-	// 	const heart = new Heart(10, 5, 0, '10754118445dd3a1c74bc7d');
-		
-	// 	scene.add(heart.mesh);
-	// 	objects.push(heart.mesh);
-
-	// 	console.log(objects);
-	// });
-
 	const raycaster = new THREE.Raycaster();
 	canvas.addEventListener('mousemove', handleMouseMove,  {passive: false});
 
@@ -267,12 +255,7 @@ function init() {
 				objects.push(heart.mesh);
 				console.log('追加されたyo');
 			}
-			// } else if (objects[0].id !== objects[0].id){
-			// 	const heart = new Heart(10, 5, 0, response.data[0].img);
-			// 	scene.add(heart.mesh);
-			// 	objects.push(heart.mesh);
-			// 	console.log('追加されたよ');
-			// }
+
 		})
 		.catch(function (error) {
 			// データの送信に失敗したときの処理をここに書く
