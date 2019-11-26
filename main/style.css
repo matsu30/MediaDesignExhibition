@@ -12,6 +12,37 @@ html,body {
     color:#EDA8CD; 
 }
 
+.mini{
+    font-size: 10px;
+}
+
+
+.my-parts {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    cursor: pointer;
+}
+.my-parts span::before,
+.my-parts span::after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 84%;
+    height: 16%;
+    margin: -8% 0 0 -42%;
+    background: #C63967;
+}
+.my-parts span::before {
+    transform: rotate(-45deg);
+}
+.my-parts span::after {
+    transform: rotate(45deg);
+}
+
+
 .header{
   /*position: fixed;*/
     width: 100%;

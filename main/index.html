@@ -10,9 +10,25 @@
         <script src="js/loaders/GLTFLoader.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="window.css">
     </head>
 
     <body>
+
+    <div id="js-detail">
+            <nav class="comment">
+                <div class="my-parts" id="my-parts"><span></span></div>
+                <div class="grid-Container dbg-Border">
+                    <div class="grid-img">
+                        <div id="img" class="HImg"></div>
+                        <img class="kirinuki" src="kirinuki.png"  width="310px">
+                    </div>
+                    <div class="grid-title"></div>
+                    <div class="comment-text"></div>
+                </div>
+            </nav>
+    </div>
+
     <header class="header">
         <div class="header">
             「<span class="suki">好き</span>」を「<span class="suki">かたち</span>」に。
@@ -72,7 +88,7 @@
             <div class="menu-text">
                 <u>しくみ</u>
                 <p>　</p>
-                <p>まずは画面中央のQRコードから</P>
+                <p>まずはQRコードから</P>
                 <p>あなたの｢<span class="suki">好き</span>｣を</P>
                 <p>送ってください。</P>
                 <p>　</p>
@@ -82,6 +98,7 @@
                 <p>生成されるハート、</P>
                 <p>｢<span class="suki">かたち</span>｣の大きさが</P>
                 <p>変わります。</P>
+                <p><span class="mini">※現在未実装です。</span></p>
             </div>
             <img class="img" src="2-2.png" alt="送信する" width="200px">
         </nav>

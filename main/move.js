@@ -65,11 +65,22 @@ function toggleNav() {
 }
   
 toggleNav();
-  
+
+var title = document.querySelector(".grid-title");
+var body = document.querySelector(".comment-text");
+var Img = document.getElementById("img");
+const detail = document.getElementById("js-detail");
+var close = document.getElementById("my-parts");
+
+
+
 // ここからtree.jsの処理
 window.addEventListener('load', init);
 
 const objects = []; // 生成したハートを入れておく配列
+let heartDataList = [];  //APIから取得したデータを保存する
+let focusHeartId;
+
 
 function init() {
 	// サイズを指定
@@ -111,9 +122,11 @@ function init() {
 	scene.add(new THREE.AmbientLight(0xF2E4EE, 1.5)); 
 	scene.fog = new THREE.Fog(0xF2E4EE, 10, 30);
 
+	//t　は画像ファイル名
 	Heart = function(x, y, z, t){
-		this.id = t;
+
 		this.mesh = new THREE.Object3D(); 
+		this.mesh.imageId = t;
 
 		function getRandom(min, max) {
 			return Math.floor(Math.random() * (max + 1 - min)) + min;
@@ -125,7 +138,8 @@ function init() {
 
 		const tm = new TimelineMax({
 			yoyo: true, 
-			repeat: -1
+			repeat: -1,
+			delay: getRandom(0, 2)
 		});
 
 		const loader = new THREE.GLTFLoader();
@@ -153,20 +167,9 @@ function init() {
 		});
 	}
 
-	//////////////////////////////////////
-
-	// var geom = new THREE.BoxGeometry(4,4,.2);
-	// const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
-	// const ms = new THREE.Mesh(geom, material);
-	// scene.add(ms);
-	// objects.push(ms);
-
-	////////////////////////////////////////////
-
 	const raycaster = new THREE.Raycaster();
-	canvas.addEventListener('mousemove', handleMouseMove,  {passive: false});
-
-	tick();
+	canvas.addEventListener('mousemove', handleMouseMove,{passive: false});
+	canvas.addEventListener('click', onCanvasClick);
 
 	// マウスを動かしたときのイベント
 	function handleMouseMove(event) {
@@ -182,19 +185,58 @@ function init() {
 		mouse.y = -(y / h) * 2 + 1;
 	}
 
+	function onCanvasClick() {
+		if (typeof focusHeartId === 'undefined') {
+			// マウスオンしているハートがない時
+		} else {
+			// マウスオンしているハートがある時
+				console.log(`クリックしたハートのIDは ${focusHeartId}`);
+				for (let i = 0; i < heartDataList.length; i++) {
+					const heartData = heartDataList[i];
+					if (heartData.img === focusHeartId) {
+						console.log('クリックされてデータは', heartData);
+						var tit = title.innerHTML += heartData.title;
+						var msg = body.innerHTML += heartData.body;
+						Img.innerHTML = `
+						<div>
+							<img src="/api/postheart/images/${heartData.img}.jpeg" width="300px">
+						</div>
+						`;
+						TweenMax.to(detail, 0.6, { autoAlpha: 1.0 });
+					}
+			
+				}
+		}
+	}
+
+	close.addEventListener("click", function() {
+		TweenMax.to(detail, 0.6, { autoAlpha: 0.0 });
+	});
+
 	// 毎フレーム時に実行されるループイベントです
 	function tick() {
 		// レイキャスト = マウス位置からまっすぐに伸びる光線ベクトルを生成
 		raycaster.setFromCamera(mouse, camera);
 		// その光線とぶつかったオブジェクトを得る
 		const intersects = raycaster.intersectObjects(objects, true);
-		objects.map(heart => {
+		objects.map(heart => { 
 			// 交差しているオブジェクトが1つ以上存在し、
 			// 交差しているオブジェクトの1番目(最前面)のものだったら
-			if (intersects.length > 0 && heart.mesh === intersects[0].object) {
-				console.log(intersects.length);
-			} 
+			if (intersects.length > 0 ){
+				if(heart.children[0] === intersects[0].object) {
+					heart.children[0].material.color.setHex(0xFF7F44);
+					focusHeartId = heart.imageId;
+				}
+			} else {
+				if (heart.children[0]){
+					heart.children[0].material.color.setHex(0xffffff);
+				}	
+			focusHeartId = undefined;
+			}
 		});
+
+
+		console.log(focusHeartId);
 
 		// レンダリング
 		renderer.render(scene, camera);
@@ -255,6 +297,7 @@ function init() {
 				objects.push(heart.mesh);
 				console.log('追加されたyo');
 			}
+			heartDataList = response.data;
 
 		})
 		.catch(function (error) {
@@ -266,9 +309,13 @@ function init() {
 			scene.remove(objects[0]);
 			objects.shift();
 		};
+
+
 	};
 
-	setInterval(showNowDate, 1000);
+	setInterval(showNowDate, 2000);
+
+	tick();
 };
 
 

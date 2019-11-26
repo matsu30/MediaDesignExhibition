@@ -1,6 +1,5 @@
 var title = document.querySelector(".grid-title");
 var body = document.querySelector(".comment-text");
-
 var Img = document.getElementById("img");
 
 let limit = 80;
