@@ -195,8 +195,8 @@ function init() {
 					const heartData = heartDataList[i];
 					if (heartData.img === focusHeartId) {
 						console.log('クリックされてデータは', heartData);
-						var tit = title.innerHTML += heartData.title;
-						var msg = body.innerHTML += heartData.body;
+						var tit = title.innerHTML = heartData.title;
+						var msg = body.innerHTML = heartData.body;
 						Img.innerHTML = `
 						<div>
 							<img src="/api/postheart/images/${heartData.img}.jpeg" width="300px">
@@ -224,7 +224,7 @@ function init() {
 			// 交差しているオブジェクトの1番目(最前面)のものだったら
 			if (intersects.length > 0 ){
 				if(heart.children[0] === intersects[0].object) {
-					heart.children[0].material.color.setHex(0xFF7F44);
+					heart.children[0].material.color.setHex(0xfa9bb9);
 					focusHeartId = heart.imageId;
 				}
 			} else {
