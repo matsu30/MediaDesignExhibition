@@ -194,14 +194,10 @@ html,body {
 .img{
     margin-left: 120px;
 }
-/*menu1*/
-/* .nav-open-1 .global-nav--1 {
-    right: 0;
-}
 
-.nav-open-2 .global-nav--2 {
-    right: 0;
-}*/
+.QR{
+    margin-left: 84%;
+}
 
 .fotter{
     width: 100%;

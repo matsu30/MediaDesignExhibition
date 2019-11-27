@@ -272,20 +272,11 @@ function init() {
 			var num1 = parseInt(objects.length);
 			var num2 = parseInt(response.data[num1].id);
 			var plus = num1 + num2;
-			console.log(response);
-			console.log(response.data[0].img);
-			console.log(response.data[0].id);
-			console.log(num1);
-			console.log(num2);
-			console.log(num1 + num2);
-
 
 			limit = 80;
 			
 			if (objects.length === 0) {
 				for (var i = 0; i < response.data.length; i++) {
-					console.log(i);
-					console.log(response.data[i].id);
 					const heart = new Heart(10, 5, 0, response.data[i].img);
 					scene.add(heart.mesh);
 					objects.push(heart.mesh);
@@ -296,7 +287,12 @@ function init() {
 				scene.add(heart.mesh);
 				objects.push(heart.mesh);
 				console.log('追加されたyo');
+				let HeartP = heart.mesh.position
+				camera.position.set(HeartP.x, HeartP.y, HeartP.z + 3);
+				console.log(HeartP);
+				console.log(camera.position);
 			}
+
 			heartDataList = response.data;
 
 		})
