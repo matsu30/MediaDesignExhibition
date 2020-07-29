@@ -155,7 +155,7 @@ function init() {
 			ease: Back.easeInOut
 		}, 'animate0');
 
-		loader.load('./models/glTF/Heart.glTF', object => {
+		loader.load('./models/glTF/Heart.gltf', object => {
 			const heart = object.scene.children[0];
 			const loader = new THREE.TextureLoader();
 			const item = '/api/postheart/images/' + t + '.jpeg';
@@ -272,6 +272,8 @@ function init() {
 			var num1 = parseInt(objects.length);
 			var num2 = parseInt(response.data[num1].id);
 			var plus = num1 + num2;
+			console.log(plus);
+			console.log(response.data[0].id);
 
 			limit = 80;
 			
@@ -287,10 +289,6 @@ function init() {
 				scene.add(heart.mesh);
 				objects.push(heart.mesh);
 				console.log('追加されたyo');
-				let HeartP = heart.mesh.position
-				camera.position.set(HeartP.x, HeartP.y, HeartP.z + 3);
-				console.log(HeartP);
-				console.log(camera.position);
 			}
 
 			heartDataList = response.data;
@@ -309,7 +307,7 @@ function init() {
 
 	};
 
-	setInterval(showNowDate, 2000);
+	setInterval(showNowDate, 1000);
 
 	tick();
 };
