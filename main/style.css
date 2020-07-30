@@ -62,7 +62,7 @@ html,body {
     padding-top: 40px;
     background-color: #F5D8E8;
     transition: all .6s;
-    z-index: 200;
+    z-index: 1000;
     overflow-y: auto; /* メニューが多くなったらスクロールできるように */
     font-size: 13px;
     text-align: left;
@@ -146,7 +146,7 @@ html,body {
     padding-top: 40px;
     background-color: #fff;
     /* transition: all .6s; */
-    z-index: 100;
+    z-index: 950;
     overflow-y: auto; /* メニューが多くなったらスクロールできるように */
     font-size: 13px;
     text-align: left;
@@ -162,7 +162,7 @@ html,body {
     padding-top: 40px;
     background-color: #fff;
     /* transition: all .6s; */
-    z-index: 100;
+    z-index: 950;
     overflow-y: auto; /* メニューが多くなったらスクロールできるように */
     font-size: 13px;
     text-align: left;
