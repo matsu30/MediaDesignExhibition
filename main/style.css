@@ -80,7 +80,7 @@ html,body {
     width: 70px; /* クリックしやすいようにちゃんと幅を指定する */
     height: 40px; /* クリックしやすいようにちゃんと高さを指定する */
     cursor: pointer;
-    z-index: 300;
+    z-index: 1500;
 }
 
 .global-nav__item {
