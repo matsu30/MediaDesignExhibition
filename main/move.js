@@ -66,6 +66,7 @@ function toggleNav() {
   
 toggleNav();
 
+var winCancel = document.querySelector(".cancel");
 var title = document.querySelector(".grid-title");
 var body = document.querySelector(".comment-text");
 var Img = document.getElementById("img");
@@ -242,6 +243,10 @@ function init() {
 		renderer.render(scene, camera);
 		requestAnimationFrame(tick);
 	}
+
+	winCancel.addEventListener("click", function() {
+		TweenMax.to(detail, 0.6, { autoAlpha: 0.0 });
+	});
 
 	// 初期化のために実行
 	onResize();
